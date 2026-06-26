@@ -3,61 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>محرك البحث العلمي - متوافق مع الهواتف</title>
+    <title>محرك البحث العلمي المتقدم</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Cairo', sans-serif;
             min-height: 100vh;
-            padding: 10px;
+            background: #0f0c29;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            padding: 20px;
             position: relative;
             overflow-x: hidden;
         }
+        /* خلفية متحركة */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(102, 126, 234, 0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 60%, rgba(118, 75, 162, 0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 50% 80%, rgba(237, 70, 120, 0.08) 0%, transparent 50%);
             z-index: 0;
-            animation: gradientShift 20s ease-in-out infinite;
+            animation: bgFloat 25s ease-in-out infinite alternate;
         }
-        @keyframes gradientShift {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.1) rotate(3deg); }
+        @keyframes bgFloat {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { transform: translate(2%, 3%) scale(1.05) rotate(3deg); }
         }
+
+        /* ===== CONTAINER ===== */
         .container {
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 28px;
-            padding: 20px 16px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 48px;
+            padding: 30px 35px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
             z-index: 1;
-            animation: slideUp 0.8s ease-out;
+            transition: all 0.4s ease;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
         }
         .header::after {
@@ -66,174 +73,234 @@
             bottom: -2px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 120px;
             height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #667eea, #764ba2, #ed4678);
             border-radius: 10px;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
         }
-        h1 {
-            font-size: 1.8rem;
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .logo-icon {
+            font-size: 2.8rem;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 70px;
+            height: 70px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 8px 50px rgba(102, 126, 234, 0.6); }
+        }
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #c8d6e5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        .logo-text small {
+            font-size: 1rem;
+            font-weight: 600;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        h1 .icon { font-size: 2rem; -webkit-text-fill-color: initial; }
-        h1 small {
-            font-size: 0.8rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-text-fill-color: white;
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-weight: 500;
+            margin-right: 8px;
         }
         .subtitle {
-            color: #5a6a7e;
-            font-size: 0.95rem;
-            margin-top: 6px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            margin-top: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .subtitle .badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 2px 10px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
         }
+
+        /* ===== API STATUS ===== */
         .api-status {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            padding: 10px 16px;
-            border-radius: 16px;
-            margin-bottom: 18px;
+            background: rgba(46, 204, 113, 0.08);
+            border: 1px solid rgba(46, 204, 113, 0.15);
+            border-radius: 20px;
+            padding: 12px 22px;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
-            border: 1px solid #a5d6a7;
+            gap: 12px;
+            backdrop-filter: blur(10px);
         }
         .api-status .status-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
         .api-status .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: #4caf50;
+            background: #2ecc71;
             display: inline-block;
-            animation: pulse 2s infinite;
+            animation: pulseDot 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.7; }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.8); }
         }
-        .api-status .status-text { font-weight: 600; color: #1b5e20; font-size: 0.85rem; }
-        .api-status .status-details { color: #2e7d32; font-size: 0.75rem; }
+        .api-status .status-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .api-status .status-details {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8rem;
+        }
         .api-status .status-right {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .api-status .status-item {
-            background: white;
-            padding: 2px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            color: #1b5e20;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 3px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
             font-weight: 500;
         }
+
+        /* ===== SEARCH SECTION ===== */
         .search-section {
-            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            padding: 28px 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .search-section:hover {
+            border-color: rgba(102, 126, 234, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
         .search-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
         }
         .search-grid .full-width { grid-column: 1 / -1; }
+        .search-grid .half-width { grid-column: span 2; }
+
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
         }
         .form-group label {
             font-weight: 600;
-            color: #2c3e6b;
-            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
-        .form-group label .label-icon { font-size: 0.9rem; }
+        .form-group label .label-icon {
+            color: #667eea;
+            font-size: 1rem;
+        }
         .form-group label .label-hint {
-            font-size: 0.65rem;
             font-weight: 400;
-            color: #7a8a9e;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
         }
         .form-group input {
-            padding: 10px 14px;
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            border-radius: 12px;
-            font-size: 0.9rem;
+            padding: 14px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
             transition: all 0.3s ease;
-            background: white;
+            background: rgba(255, 255, 255, 0.04);
+            color: #fff;
             outline: none;
-            color: #1a2332;
             font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 400;
         }
         .form-group input:focus {
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
         }
-        .form-group input::placeholder { color: #a0b0c8; font-weight: 400; }
-        .keyword-input {
-            background: #f8f9ff;
-            border-color: #764ba2 !important;
+        .form-group input.keyword-input {
+            border-color: rgba(118, 75, 162, 0.2);
         }
-        .keyword-input:focus {
-            border-color: #764ba2 !important;
-            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.12) !important;
+        .form-group input.keyword-input:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15);
         }
         .keyword-hint {
-            font-size: 0.7rem;
-            color: #764ba2;
+            font-size: 0.75rem;
+            color: rgba(118, 75, 162, 0.6);
             background: rgba(118, 75, 162, 0.08);
-            padding: 3px 10px;
-            border-radius: 30px;
+            padding: 4px 14px;
+            border-radius: 40px;
             display: inline-block;
-            margin-top: 2px;
+            margin-top: 4px;
         }
+
+        /* ===== BUTTONS ===== */
         .btn-primary {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            color: #fff;
             border: none;
-            padding: 12px 24px;
-            border-radius: 16px;
-            font-size: 0.95rem;
+            padding: 16px 30px;
+            border-radius: 20px;
+            font-size: 1.1rem;
             font-weight: 700;
+            font-family: 'Cairo', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
             width: 100%;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
         .btn-primary::before {
             content: '';
@@ -242,71 +309,152 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.6s ease;
         }
         .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.45);
+        }
         .btn-primary:active { transform: scale(0.97); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-pdf-main {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #fff;
+            border: none;
+            padding: 16px 50px;
+            border-radius: 40px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-pdf-main::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            animation: rotateBtn 10s linear infinite;
+        }
+        @keyframes rotateBtn {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .btn-pdf-main:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 45px rgba(231, 76, 60, 0.5);
+        }
+        .btn-pdf-main:active { transform: scale(0.97); }
+        .btn-pdf-main .pdf-icon { font-size: 1.6rem; }
+        .btn-pdf-main .pdf-sub {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .btn-pdf-scihub {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .btn-pdf-scihub:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.4);
+        }
+        .btn-pdf-scihub:active { transform: scale(0.95); }
+
+        /* ===== RESULTS ===== */
         .results-section {
-            margin: 18px 0;
+            margin: 25px 0;
         }
         .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
-            background: linear-gradient(135deg, #f8f9ff, #eef1ff);
-            border-radius: 14px;
-            margin-bottom: 14px;
+            padding: 14px 22px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 8px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            gap: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .results-count {
-            color: #2c3e6b;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .results-count .count-number {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0 10px;
+            padding: 0 14px;
             border-radius: 30px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            color: #fff;
         }
         .results-grid {
             display: grid;
-            gap: 12px;
-            max-height: 650px;
+            gap: 16px;
+            max-height: 750px;
             overflow-y: auto;
-            padding: 2px;
+            padding: 3px;
         }
         .results-grid::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
         .results-grid::-webkit-scrollbar-track {
-            background: #f0f2ff;
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
         }
         .results-grid::-webkit-scrollbar-thumb {
             background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 10px;
         }
+
+        /* ===== ARTICLE CARD ===== */
         .article-card {
-            background: white;
-            border: 2px solid rgba(102, 126, 234, 0.1);
-            border-radius: 18px;
-            padding: 14px 16px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 20px 24px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             position: relative;
             overflow: hidden;
+            cursor: default;
         }
         .article-card::before {
             content: '';
@@ -315,285 +463,327 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #667eea, #764ba2, #ed4678);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
+        }
+        .article-card:hover {
+            border-color: rgba(102, 126, 234, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
         .article-card:hover::before { opacity: 1; }
-        .article-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.12);
-        }
         .article-card .match-badge {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            padding: 2px 10px;
+            top: 12px;
+            left: 16px;
+            padding: 2px 14px;
             border-radius: 30px;
             font-size: 0.6rem;
             font-weight: 700;
-            background: #4caf50;
-            color: white;
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.15);
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.5px;
         }
         .article-title {
             font-weight: 700;
-            color: #1a2332;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            padding-right: 55px;
+            color: #fff;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            padding-left: 80px;
         }
         .article-title .keyword-highlight {
-            background: linear-gradient(135deg, #764ba244, #667eea44);
-            padding: 0 4px;
-            border-radius: 4px;
+            background: linear-gradient(135deg, rgba(118, 75, 162, 0.25), rgba(102, 126, 234, 0.25));
+            padding: 0 6px;
+            border-radius: 6px;
+            color: #c8b6ff;
+            border: 1px solid rgba(118, 75, 162, 0.15);
             font-weight: 800;
-            color: #764ba2;
-            border: 1px solid rgba(118, 75, 162, 0.2);
         }
         .article-url {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
             word-break: break-all;
         }
         .article-url a {
-            color: #1a6f8f;
+            color: #667eea;
             text-decoration: none;
-            border-bottom: 1px dashed #8ab4c8;
+            border-bottom: 1px dashed rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
         }
         .article-url a:hover {
-            color: #0d3f55;
-            border-bottom: 1px solid #0d3f55;
+            color: #a78bfa;
+            border-bottom-color: #667eea;
         }
         .article-meta {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            font-size: 0.75rem;
-            color: #5a6a7e;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
         }
         .article-meta .meta-item {
             display: flex;
             align-items: center;
-            gap: 3px;
-            background: #f8f9ff;
-            padding: 2px 10px;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 14px;
             border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .article-meta .meta-item .meta-icon { font-size: 0.75rem; }
+        .article-meta .meta-item .meta-icon { font-size: 0.8rem; }
         .article-source {
-            background: linear-gradient(135deg, #667eea22, #764ba222);
-            padding: 2px 10px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12), rgba(118, 75, 162, 0.12));
+            padding: 2px 14px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.7rem;
-            color: #667eea;
+            font-size: 0.75rem;
+            color: #a78bfa;
+            border: 1px solid rgba(102, 126, 234, 0.08);
         }
         .article-doi {
-            background: #fff3e0;
-            padding: 2px 10px;
+            background: rgba(255, 152, 0, 0.08);
+            padding: 2px 14px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.7rem;
-            color: #e65100;
+            font-size: 0.75rem;
+            color: #ffb74d;
             direction: ltr;
             font-family: 'Courier New', monospace;
-            border: 1px solid #ffcc80;
+            border: 1px solid rgba(255, 152, 0, 0.08);
         }
-        .article-doi .doi-prefix { color: #bf360c; font-weight: 700; }
         .doi-link {
-            color: #e65100;
+            color: #ffb74d;
             text-decoration: underline;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .btn-pdf-scihub {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            padding: 5px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.8rem;
-            box-shadow: 0 3px 12px rgba(231, 76, 60, 0.25);
-            display: inline-flex;
+        .doi-link:hover {
+            color: #ffcc80;
+            text-shadow: 0 0 20px rgba(255, 152, 0, 0.2);
+        }
+        .article-actions {
+            display: flex;
             align-items: center;
-            gap: 4px;
-            align-self: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 4px;
         }
-        .btn-pdf-scihub:active { transform: scale(0.95); }
-        .btn-pdf-scihub .btn-icon { font-size: 0.85rem; }
+
+        /* ===== LOADING / EMPTY / ERROR ===== */
         .loading-spinner {
             display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top: 3px solid white;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #fff;
             border-radius: 50%;
-            animation: spin 0.7s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
         .empty-state {
             text-align: center;
-            padding: 30px 15px;
-            color: #5a6a7e;
-            font-size: 0.95rem;
+            padding: 50px 20px;
+            color: rgba(255, 255, 255, 0.3);
         }
-        .empty-state .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+        .empty-state .empty-icon { font-size: 4rem; display: block; margin-bottom: 12px; opacity: 0.5; }
         .empty-state .empty-title {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #2c3e6b;
-            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
         }
         .empty-state .empty-desc {
-            color: #8a9aa8;
-            max-width: 350px;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.95rem;
+            max-width: 400px;
             margin: 0 auto;
-            font-size: 0.85rem;
         }
+
         .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 14px 16px;
-            border-radius: 14px;
-            border: 1px solid #ef9a9a;
-            margin: 8px 0;
+            background: rgba(198, 40, 40, 0.08);
+            border: 1px solid rgba(198, 40, 40, 0.15);
+            color: #ef5350;
+            padding: 18px 22px;
+            border-radius: 20px;
+            margin: 10px 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
-        .error-message .error-icon { font-size: 1.6rem; }
+        .error-message .error-icon { font-size: 2rem; }
         .error-message .error-details {
-            font-size: 0.8rem;
-            color: #b71c1c;
-            background: #ffcdd2;
-            padding: 3px 8px;
-            border-radius: 6px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(0,0,0,0.2);
+            padding: 4px 12px;
+            border-radius: 8px;
         }
         .error-message .retry-btn {
-            background: #c62828;
-            color: white;
-            border: none;
-            padding: 5px 18px;
+            background: rgba(198, 40, 40, 0.15);
+            color: #ef5350;
+            border: 1px solid rgba(198, 40, 40, 0.15);
+            padding: 6px 22px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
             align-self: flex-start;
         }
         .error-message .retry-btn:hover {
-            background: #b71c1c;
+            background: rgba(198, 40, 40, 0.25);
             transform: scale(1.05);
         }
+
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: #e0e0e0;
+            background: rgba(255, 255, 255, 0.04);
             border-radius: 10px;
             margin: 6px 0;
             overflow: hidden;
         }
         .progress-bar .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #667eea, #764ba2, #ed4678);
             width: 0%;
             transition: width 0.3s ease;
             border-radius: 10px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
         }
         .progress-info {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
-            color: #2c3e6b;
-            margin-bottom: 3px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 4px;
         }
+
         .warning-box {
-            background: #fff3e0;
-            border: 1px solid #ffb74d;
-            padding: 8px 14px;
-            border-radius: 12px;
+            background: rgba(255, 152, 0, 0.06);
+            border: 1px solid rgba(255, 152, 0, 0.1);
+            padding: 10px 18px;
+            border-radius: 14px;
             margin: 6px 0;
-            color: #e65100;
+            color: #ffb74d;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 10px;
+            font-size: 0.9rem;
         }
-        .warning-box .warning-icon { font-size: 1.2rem; }
         .success-box {
-            background: #e8f5e9;
-            border: 1px solid #66bb6a;
-            padding: 8px 14px;
-            border-radius: 12px;
+            background: rgba(46, 204, 113, 0.06);
+            border: 1px solid rgba(46, 204, 113, 0.1);
+            padding: 10px 18px;
+            border-radius: 14px;
             margin: 6px 0;
-            color: #2e7d32;
+            color: #66bb6a;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            gap: 10px;
+            font-size: 0.9rem;
         }
-        .success-box .success-icon { font-size: 1.2rem; }
+
+        /* ===== PDF SECTION ===== */
+        .pdf-section {
+            margin-top: 28px;
+            text-align: center;
+            position: relative;
+            padding-top: 20px;
+        }
+        .pdf-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .search-grid { grid-template-columns: 1fr 1fr; }
             .search-grid .full-width { grid-column: 1 / -1; }
+            .search-grid .half-width { grid-column: span 1; }
         }
         @media (max-width: 768px) {
-            .container { padding: 14px; border-radius: 20px; }
-            h1 { font-size: 1.5rem; }
+            body { padding: 12px; }
+            .container { padding: 18px 16px; border-radius: 32px; }
+            h1 .logo-text { font-size: 1.6rem; }
+            .logo-icon { width: 56px; height: 56px; font-size: 2.2rem; }
             .search-grid { grid-template-columns: 1fr; }
-            .article-card { padding: 12px 14px; }
-            .article-title { padding-right: 0; }
+            .search-grid .half-width { grid-column: 1; }
+            .search-section { padding: 18px; }
+            .article-card { padding: 16px 18px; }
+            .article-title { padding-left: 0; }
             .article-card .match-badge {
                 position: static;
                 display: inline-block;
-                margin-bottom: 4px;
-                font-size: 0.55rem;
+                margin-bottom: 6px;
             }
+            .btn-pdf-main { padding: 14px 30px; font-size: 1rem; }
+            .results-header { flex-direction: column; align-items: flex-start; }
             .api-status { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 1.2rem; }
-            .container { padding: 10px; }
-            .search-section { padding: 12px; }
-            .article-card { padding: 10px 12px; }
+            .container { padding: 12px; border-radius: 24px; }
+            .logo-text { font-size: 1.3rem; }
+            .logo-icon { width: 44px; height: 44px; font-size: 1.8rem; }
+            .form-group input { padding: 12px 14px; font-size: 0.9rem; }
+            .btn-primary { padding: 14px 20px; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
+
 <div class="container">
+    <!-- ===== HEADER ===== -->
     <div class="header">
-        <h1>
-            <span class="icon">📚</span>
-            محرك البحث العلمي
-            <small>50 مصدراً</small>
-        </h1>
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="logo-text">
+                محرك البحث العلمي
+                <small>AI</small>
+            </div>
+        </div>
         <div class="subtitle">
-            <span>🔍 بحث في 50 قاعدة بيانات</span>
-            <span class="badge">جميع الكلمات</span>
-            <span class="badge" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">PDF مباشر</span>
+            <span><i class="fas fa-search" style="color:#667eea;"></i> بحث في 50 قاعدة بيانات</span>
+            <span class="badge"><i class="fas fa-check-circle"></i> جميع الكلمات المفتاحية</span>
+            <span class="badge" style="background: linear-gradient(135deg, rgba(231,76,60,0.15), rgba(192,57,43,0.15)); border-color: rgba(231,76,60,0.1);">
+                <i class="fas fa-file-pdf"></i> PDF مباشر
+            </span>
         </div>
     </div>
 
+    <!-- ===== API STATUS ===== -->
     <div class="api-status">
         <div class="status-left">
             <span class="dot"></span>
-            <span class="status-text">🟢 متصل</span>
+            <span class="status-text"><i class="fas fa-plug"></i> متصل</span>
             <span class="status-details">| Crossref · 50 مصدراً</span>
         </div>
         <div class="status-right">
-            <span class="status-item">📊 150M+</span>
-            <span class="status-item">✅ دقة عالية</span>
+            <span class="status-item"><i class="fas fa-database"></i> 150M+</span>
+            <span class="status-item"><i class="fas fa-bullseye"></i> دقة عالية</span>
         </div>
     </div>
 
+    <!-- ===== SEARCH ===== -->
     <div class="search-section">
         <div class="search-grid">
             <div class="form-group full-width">
                 <label>
-                    <span class="label-icon">📝</span>
+                    <span class="label-icon"><i class="fas fa-heading"></i></span>
                     الموضوع (اختياري)
                     <span class="label-hint">(يساعد في تضييق البحث)</span>
                 </label>
@@ -601,46 +791,51 @@
             </div>
             <div class="form-group full-width">
                 <label>
-                    <span class="label-icon">🔑</span>
+                    <span class="label-icon"><i class="fas fa-key"></i></span>
                     الكلمات المفتاحية (إلزامية)
                     <span class="label-hint">(يجب أن تظهر جميعها في العنوان)</span>
                 </label>
                 <input type="text" id="keywordsInput" class="keyword-input" placeholder="مثال: neural networks">
-                <span class="keyword-hint">⚠️ سيتم عرض المقالات التي تحتوي على <strong>جميع</strong> هذه الكلمات في عنوانها</span>
+                <span class="keyword-hint"><i class="fas fa-exclamation-triangle"></i> سيتم عرض المقالات التي تحتوي على <strong>جميع</strong> هذه الكلمات في عنوانها</span>
             </div>
             <div class="form-group">
-                <label><span class="label-icon">📅</span> من سنة</label>
+                <label><span class="label-icon"><i class="fas fa-calendar-alt"></i></span> من سنة</label>
                 <input type="number" id="yearFrom" placeholder="مثال: 2000" min="1900" max="2026">
             </div>
             <div class="form-group">
-                <label><span class="label-icon">📅</span> إلى سنة</label>
+                <label><span class="label-icon"><i class="fas fa-calendar-alt"></i></span> إلى سنة</label>
                 <input type="number" id="yearTo" placeholder="مثال: 2025" min="1900" max="2026">
             </div>
             <div class="form-group">
                 <label>
-                    <span class="label-icon">📊</span>
+                    <span class="label-icon"><i class="fas fa-list-ol"></i></span>
                     العدد المطلوب
                     <span class="label-hint">(0 = جميع المطابقات)</span>
                 </label>
                 <input type="number" id="desiredCount" placeholder="مثال: 100" value="100" min="0" max="10000">
             </div>
             <div class="form-group full-width">
-                <button class="btn-primary" id="searchBtn">🚀 بحث</button>
+                <button class="btn-primary" id="searchBtn">
+                    <i class="fas fa-rocket"></i> بحث
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- ===== RESULTS ===== -->
     <div class="results-section" id="resultsSection">
         <div class="results-header">
             <div class="results-count">
-                📊 عدد المقالات
+                <i class="fas fa-chart-bar"></i> عدد المقالات
                 <span class="count-number" id="resultsCount">0</span>
             </div>
-            <div style="font-size:0.7rem; color:#764ba2;">🔑 جميعها تحتوي على الكلمات</div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.3);">
+                <i class="fas fa-check-circle" style="color:#764ba2;"></i> جميعها تحتوي على الكلمات
+            </div>
         </div>
-        <div id="progressContainer" style="display:none; margin-bottom:10px;">
+        <div id="progressContainer" style="display:none; margin-bottom:12px;">
             <div class="progress-info">
-                <span id="progressStatus">جاري التحميل...</span>
+                <span id="progressStatus"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</span>
                 <span id="progressText">0%</span>
             </div>
             <div class="progress-bar">
@@ -650,18 +845,29 @@
         <div id="messageContainer"></div>
         <div class="results-grid" id="resultsGrid">
             <div class="empty-state">
-                <span class="empty-icon">🔬</span>
+                <span class="empty-icon"><i class="fas fa-microscope"></i></span>
                 <div class="empty-title">أدخل الكلمات المفتاحية</div>
                 <div class="empty-desc">سيتم عرض المقالات مع رابط وزر PDF</div>
             </div>
         </div>
     </div>
 
+    <!-- ===== PDF SECTION ===== -->
+    <div class="pdf-section">
+        <button class="btn-pdf-main" id="pdfBtn">
+            <span class="pdf-icon"><i class="fas fa-file-pdf"></i></span>
+            استخراج ملف PDF
+            <span class="pdf-sub">(Sci-Hub)</span>
+        </button>
+    </div>
 </div>
 
 <script>
+    // ============================================================
+    // ===== SAME JAVASCRIPT AS BEFORE (WITH MINOR IMPROVEMENTS) ====
+    // ============================================================
     (function() {
-        // ===== عناصر DOM =====
+        // عناصر DOM
         const topicInput = document.getElementById('topicInput');
         const keywordsInput = document.getElementById('keywordsInput');
         const yearFrom = document.getElementById('yearFrom');
@@ -670,6 +876,7 @@
         const searchBtn = document.getElementById('searchBtn');
         const resultsGrid = document.getElementById('resultsGrid');
         const resultsCount = document.getElementById('resultsCount');
+        const pdfBtn = document.getElementById('pdfBtn');
         const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
@@ -787,8 +994,8 @@
             (url) => `https://cors-anywhere.herokuapp.com/${encodeURIComponent(url)}`
         ];
 
-        // ===== دالة fetch مع بروكسي تلقائي =====
-        async function fetchWithProxy(url, retries = 3, timeout = 20000) {
+        async function fetchWithProxy(url, retries = 2, timeout = 20000) {
+            // المحاولات المباشرة
             for (let attempt = 0; attempt < retries; attempt++) {
                 try {
                     const controller = new AbortController();
@@ -809,36 +1016,29 @@
                     }
                     return await response.json();
                 } catch (error) {
-                    console.warn(`محاولة مباشرة ${attempt+1} فشلت:`, error.message);
-                    if (attempt < retries - 1) {
-                        await delay(1500 * (attempt + 1));
-                    }
+                    console.warn(`مباشر ${attempt+1} فشل:`, error.message);
+                    if (attempt < retries - 1) await delay(1500 * (attempt + 1));
                 }
             }
 
-            console.warn('المحاولات المباشرة فشلت، نجرب البروكسي...');
-            
+            // البروكسي
             for (let proxyFn of PROXY_LIST) {
                 try {
                     const proxyUrl = proxyFn(url);
-                    console.log('محاولة بروكسي:', proxyUrl);
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), timeout);
                     const response = await fetch(proxyUrl, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
                         },
                         mode: 'cors',
                         credentials: 'omit',
                         signal: controller.signal
                     });
                     clearTimeout(timeoutId);
-                    if (!response.ok) {
-                        console.warn('بروكسي فشل مع HTTP', response.status);
-                        continue;
-                    }
+                    if (!response.ok) continue;
                     const data = await response.text();
                     try {
                         const parsed = JSON.parse(data);
@@ -848,11 +1048,7 @@
                         return parsed;
                     } catch (e) {
                         if (data.startsWith('{') || data.startsWith('[')) {
-                            try {
-                                return JSON.parse(data);
-                            } catch (e2) {
-                                console.warn('فشل تحليل JSON من البروكسي');
-                            }
+                            try { return JSON.parse(data); } catch (e2) {}
                         }
                     }
                 } catch (error) {
@@ -860,8 +1056,7 @@
                     await delay(1000);
                 }
             }
-
-            throw new Error('فشل الاتصال حتى عبر البروكسي. تأكد من اتصالك بالإنترنت أو استخدم VPN.');
+            throw new Error('فشل الاتصال حتى عبر البروكسي. تأكد من اتصالك بالإنترنت.');
         }
 
         // ===== جلب المقالات =====
@@ -886,7 +1081,7 @@
             progressContainer.style.display = 'block';
             progressFill.style.width = '0%';
             progressText.textContent = '0%';
-            progressStatus.textContent = `جاري البحث... (الهدف: ${isUnlimited ? 'جميع المطابقات' : targetCount})`;
+            progressStatus.innerHTML = `<i class="fas fa-spinner fa-spin"></i> جاري البحث... (الهدف: ${isUnlimited ? 'جميع المطابقات' : targetCount})`;
 
             while (hasMore && page < maxPages && allMatched.length < targetCount) {
                 const url = `https://api.crossref.org/works?query=${encodedQuery}&filter=from-pub-date:${fromYear},until-pub-date:${toYear}&rows=${rowsPerPage}&offset=${offset}&sort=relevance&order=desc`;
@@ -905,9 +1100,8 @@
 
                 const items = data.message.items;
                 totalFetched += items.length;
-
                 const keywordLower = keywordList.map(k => k.toLowerCase());
-                
+
                 const matched = items.filter(item => {
                     const sourceName = detectSource(item);
                     if (!sourceName) return false;
@@ -940,7 +1134,7 @@
                 const progress = Math.min(((page + 1) / 20) * 100, 95);
                 progressFill.style.width = progress + '%';
                 progressText.textContent = Math.round(progress) + '%';
-                progressStatus.textContent = `تم جلب ${totalFetched} مقالة، تم العثور على ${allMatched.length} مطابقة...`;
+                progressStatus.innerHTML = `<i class="fas fa-spinner fa-spin"></i> تم جلب ${totalFetched} مقالة، تم العثور على ${allMatched.length} مطابقة...`;
 
                 if (items.length < rowsPerPage) {
                     hasMore = false;
@@ -955,11 +1149,11 @@
 
             messageContainer.innerHTML = '';
             if (allMatched.length === 0) {
-                messageContainer.innerHTML = `<div class="warning-box"><span class="warning-icon">⚠️</span><div><strong>تنبيه:</strong> لم يتم العثور على مقالات مطابقة. جرب كلمات مفتاحية مختلفة أو وسّع نطاق السنوات.</div></div>`;
+                messageContainer.innerHTML = `<div class="warning-box"><i class="fas fa-exclamation-triangle warning-icon"></i><div><strong>تنبيه:</strong> لم يتم العثور على مقالات مطابقة. جرب كلمات مفتاحية مختلفة أو وسّع نطاق السنوات.</div></div>`;
             } else if (allMatched.length < targetCount && !isUnlimited) {
-                messageContainer.innerHTML = `<div class="warning-box"><span class="warning-icon">⚠️</span><div><strong>تنبيه:</strong> تم العثور على ${allMatched.length} مقالة فقط (العدد المطلوب ${targetCount}). قد لا يتوفر عدد كافٍ.</div></div>`;
+                messageContainer.innerHTML = `<div class="warning-box"><i class="fas fa-exclamation-circle warning-icon"></i><div><strong>تنبيه:</strong> تم العثور على ${allMatched.length} مقالة فقط (العدد المطلوب ${targetCount}). قد لا يتوفر عدد كافٍ.</div></div>`;
             } else {
-                messageContainer.innerHTML = `<div class="success-box"><span class="success-icon">✅</span><div><strong>نجاح:</strong> تم العثور على ${allMatched.length} مقالة. يمكنك تحميل PDF بالضغط على زر "📄 PDF".</div></div>`;
+                messageContainer.innerHTML = `<div class="success-box"><i class="fas fa-check-circle success-icon"></i><div><strong>نجاح:</strong> تم العثور على ${allMatched.length} مقالة. يمكنك تحميل PDF بالضغط على زر "PDF".</div></div>`;
             }
 
             return allMatched;
@@ -968,7 +1162,7 @@
         // ===== عرض النتائج =====
         function displayArticles(articles) {
             if (!articles || articles.length === 0) {
-                resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon">😕</span><div class="empty-title">لا توجد نتائج</div><div class="empty-desc">لم نجد مقالات مطابقة من المصادر المعتمدة.</div></div>`;
+                resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon"><i class="fas fa-frown-open"></i></span><div class="empty-title">لا توجد نتائج</div><div class="empty-desc">لم نجد مقالات مطابقة من المصادر المعتمدة.</div></div>`;
                 resultsCount.textContent = '0';
                 return;
             }
@@ -990,30 +1184,30 @@
 
                 html += `
                     <div class="article-card" data-doi="${article.doi}">
-                        <div class="match-badge">✅ مصدر معتمد</div>
+                        <div class="match-badge"><i class="fas fa-check-circle"></i> مصدر معتمد</div>
                         <div class="article-title">${highlightedTitle}</div>
                         <div class="article-url">
-                            🔗 <a href="${articleUrl}" target="_blank" title="فتح المقالة">${articleUrl}</a>
+                            <i class="fas fa-link"></i> <a href="${articleUrl}" target="_blank" title="فتح المقالة">${articleUrl}</a>
                         </div>
                         <div class="article-meta">
-                            <span class="meta-item"><span class="meta-icon">📌</span><span class="article-source">${article.source}</span></span>
-                            <span class="meta-item"><span class="meta-icon">📅</span>${article.year}</span>
-                            <span class="meta-item"><span class="meta-icon">📄</span>${article.journal}</span>
+                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-tag"></i></span><span class="article-source">${article.source}</span></span>
+                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-calendar-alt"></i></span>${article.year}</span>
+                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-book"></i></span>${article.journal}</span>
                             ${doiValid ? `
                                 <span class="meta-item article-doi">
-                                    <span class="doi-prefix">DOI</span>
+                                    <span class="doi-prefix"><i class="fas fa-fingerprint"></i></span>
                                     <a href="#" class="doi-link" onclick="openSciHubForDOI('${displayDoi}'); return false;" title="اضغط لفتح PDF">
                                         ${displayDoi}
                                     </a>
                                 </span>
-                            ` : `<span class="meta-item" style="background:#ffebee; color:#c62828;">🚫 DOI غير صالح</span>`}
+                            ` : `<span class="meta-item" style="background:rgba(198,40,40,0.08); color:#ef5350; border-color:rgba(198,40,40,0.1);"><i class="fas fa-times-circle"></i> DOI غير صالح</span>`}
                         </div>
-                        <div>
+                        <div class="article-actions">
                             ${doiValid ? `
                                 <button class="btn-pdf-scihub" onclick="openSciHubForDOI('${displayDoi}');">
-                                    <span class="btn-icon">📄</span> PDF
+                                    <i class="fas fa-file-pdf"></i> PDF
                                 </button>
-                            ` : '<span style="color:#999; font-size:0.75rem;">🚫 لا يوجد DOI</span>'}
+                            ` : '<span style="color:rgba(255,255,255,0.2); font-size:0.8rem;"><i class="fas fa-ban"></i> لا يوجد DOI</span>'}
                         </div>
                     </div>
                 `;
@@ -1060,7 +1254,7 @@
             searchBtn.disabled = true;
             searchBtn.innerHTML = '<span class="loading-spinner"></span> جاري البحث...';
 
-            resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon">⏳</span><div class="empty-title">جاري البحث</div><div class="empty-desc">الكلمات: "${keywords}"<br>العدد المطلوب: ${desiredCount === 0 ? 'جميع المطابقات' : desiredCount}</div></div>`;
+            resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon"><i class="fas fa-spinner fa-spin"></i></span><div class="empty-title">جاري البحث</div><div class="empty-desc">الكلمات: "${keywords}"<br>العدد المطلوب: ${desiredCount === 0 ? 'جميع المطابقات' : desiredCount}</div></div>`;
             messageContainer.innerHTML = '';
 
             try {
@@ -1072,7 +1266,7 @@
                 let details = '';
                 if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError') || errorMsg.includes('CORS') || errorMsg.includes('فشل الاتصال') || errorMsg.includes('فشل جلب البيانات')) {
                     errorMsg = 'فشل الاتصال بالخادم. قد يكون السبب: ضعف الشبكة، أو حظر الخدمة، أو مشكلة في المتصفح.';
-                    details = '💡 تأكد من اتصالك بالإنترنت، وجرب استخدام شبكة Wi-Fi بدلاً من بيانات الهاتف، أو استخدم VPN. إذا استمرت المشكلة، حاول تقليل عدد المقالات المطلوبة.';
+                    details = '💡 تأكد من اتصالك بالإنترنت، وجرب استخدام شبكة Wi-Fi بدلاً من بيانات الهاتف، أو استخدم VPN.';
                 } else if (errorMsg.includes('HTTP 400')) {
                     details = 'تأكد من أن الكلمات المفتاحية لا تحتوي على رموز خاصة غير مدعومة.';
                 } else if (errorMsg.includes('HTTP 429')) {
@@ -1081,22 +1275,32 @@
                 resultsGrid.innerHTML = `
                     <div class="error-message">
                         <div style="display:flex; align-items:center; gap:12px;">
-                            <span class="error-icon">⚠️</span>
+                            <span class="error-icon"><i class="fas fa-exclamation-triangle"></i></span>
                             <div>
                                 <strong>${errorMsg}</strong>
-                                ${details ? `<div class="error-details">${details}</div>` : ''}
+                                ${details ? `<div class="error-details"><i class="fas fa-lightbulb"></i> ${details}</div>` : ''}
                             </div>
                         </div>
-                        <button class="retry-btn" onclick="document.getElementById('searchBtn').click();">🔄 إعادة المحاولة</button>
+                        <button class="retry-btn" onclick="document.getElementById('searchBtn').click();"><i class="fas fa-redo"></i> إعادة المحاولة</button>
                     </div>
                 `;
                 resultsCount.textContent = '0';
             } finally {
                 searchBtn.disabled = false;
-                searchBtn.innerHTML = '🚀 بحث';
+                searchBtn.innerHTML = '<i class="fas fa-rocket"></i> بحث';
                 progressContainer.style.display = 'none';
             }
         }
+
+        // ===== زر PDF الرئيسي =====
+        function openSciHubMain() {
+            window.open('https://sci-hub.box/', '_blank');
+            setTimeout(() => {
+                alert('📄 تم فتح Sci-Hub. يمكنك لصق DOI للبحث عن المقالة.');
+            }, 500);
+        }
+
+        pdfBtn.addEventListener('click', openSciHubMain);
 
         // ===== أحداث =====
         searchBtn.addEventListener('click', performSearch);
