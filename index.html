@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>محرك البحث العلمي - متوافق مع الهواتف</title>
     <style>
-        /* نفس الأنماط السابقة مع تحسينات للهواتف */
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +14,7 @@
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             min-height: 100vh;
-            padding: 12px;
+            padding: 10px;
             position: relative;
             overflow-x: hidden;
         }
@@ -42,8 +41,8 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 25px 20px;
+            border-radius: 28px;
+            padding: 20px 16px;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
@@ -56,8 +55,8 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
             border-bottom: 2px solid rgba(102, 126, 234, 0.2);
             position: relative;
         }
@@ -73,140 +72,135 @@
             border-radius: 10px;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
-        h1 .icon { font-size: 2.2rem; -webkit-text-fill-color: initial; }
+        h1 .icon { font-size: 2rem; -webkit-text-fill-color: initial; }
         h1 small {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-text-fill-color: white;
-            padding: 4px 16px;
+            padding: 4px 14px;
             border-radius: 50px;
             font-weight: 500;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         .subtitle {
             color: #5a6a7e;
-            font-size: 1rem;
-            margin-top: 8px;
+            font-size: 0.95rem;
+            margin-top: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
         .subtitle .badge {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
         .api-status {
             background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            padding: 12px 18px;
+            padding: 10px 16px;
             border-radius: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             border: 1px solid #a5d6a7;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15);
         }
         .api-status .status-left {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .api-status .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: #4caf50;
             display: inline-block;
             animation: pulse 2s infinite;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.4);
         }
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.3); opacity: 0.7; }
         }
-        .api-status .status-text { font-weight: 600; color: #1b5e20; font-size: 0.9rem; }
-        .api-status .status-details { color: #2e7d32; font-size: 0.8rem; }
+        .api-status .status-text { font-weight: 600; color: #1b5e20; font-size: 0.85rem; }
+        .api-status .status-details { color: #2e7d32; font-size: 0.75rem; }
         .api-status .status-right {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .api-status .status-item {
             background: white;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #1b5e20;
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .search-section {
             background: linear-gradient(135deg, #f8f9ff, #eef1ff);
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 25px;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
             border: 1px solid rgba(102, 126, 234, 0.15);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.08);
         }
         .search-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 12px;
         }
         .search-grid .full-width { grid-column: 1 / -1; }
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
         .form-group label {
             font-weight: 600;
             color: #2c3e6b;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
-        .form-group label .label-icon { font-size: 1rem; }
+        .form-group label .label-icon { font-size: 0.9rem; }
         .form-group label .label-hint {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 400;
             color: #7a8a9e;
         }
-        .form-group input, .form-group select {
-            padding: 12px 16px;
+        .form-group input {
+            padding: 10px 14px;
             border: 2px solid rgba(102, 126, 234, 0.2);
-            border-radius: 14px;
-            font-size: 0.95rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             background: white;
             outline: none;
             color: #1a2332;
             font-weight: 500;
         }
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus {
             border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
         }
         .form-group input::placeholder { color: #a0b0c8; font-weight: 400; }
         .keyword-input {
@@ -215,28 +209,28 @@
         }
         .keyword-input:focus {
             border-color: #764ba2 !important;
-            box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.12) !important;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.12) !important;
         }
         .keyword-hint {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #764ba2;
             background: rgba(118, 75, 162, 0.08);
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 30px;
             display: inline-block;
-            margin-top: 3px;
+            margin-top: 2px;
         }
         .btn-primary {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 14px 30px;
-            border-radius: 18px;
-            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
             width: 100%;
             position: relative;
             overflow: hidden;
@@ -252,51 +246,47 @@
             transition: left 0.5s ease;
         }
         .btn-primary:hover::before { left: 100%; }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.45);
-        }
         .btn-primary:active { transform: scale(0.97); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .results-section {
-            margin: 25px 0;
+            margin: 18px 0;
         }
         .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: linear-gradient(135deg, #f8f9ff, #eef1ff);
-            border-radius: 16px;
-            margin-bottom: 18px;
+            border-radius: 14px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             border: 1px solid rgba(102, 126, 234, 0.1);
         }
         .results-count {
             color: #2c3e6b;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .results-count .count-number {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 0 12px;
+            padding: 0 10px;
             border-radius: 30px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         .results-grid {
             display: grid;
-            gap: 14px;
-            max-height: 700px;
+            gap: 12px;
+            max-height: 650px;
             overflow-y: auto;
-            padding: 3px;
+            padding: 2px;
         }
         .results-grid::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .results-grid::-webkit-scrollbar-track {
             background: #f0f2ff;
@@ -309,12 +299,12 @@
         .article-card {
             background: white;
             border: 2px solid rgba(102, 126, 234, 0.1);
-            border-radius: 20px;
-            padding: 16px 20px;
+            border-radius: 18px;
+            padding: 14px 16px;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             position: relative;
             overflow: hidden;
         }
@@ -324,7 +314,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, #667eea, #764ba2);
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -332,16 +322,15 @@
         .article-card:hover::before { opacity: 1; }
         .article-card:hover {
             border-color: #667eea;
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
-            transform: translateX(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.12);
         }
         .article-card .match-badge {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 2px 12px;
+            top: 8px;
+            right: 8px;
+            padding: 2px 10px;
             border-radius: 30px;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             background: #4caf50;
             color: white;
@@ -349,9 +338,9 @@
         .article-title {
             font-weight: 700;
             color: #1a2332;
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
-            padding-right: 60px;
+            padding-right: 55px;
         }
         .article-title .keyword-highlight {
             background: linear-gradient(135deg, #764ba244, #667eea44);
@@ -362,8 +351,7 @@
             border: 1px solid rgba(118, 75, 162, 0.2);
         }
         .article-url {
-            font-size: 0.8rem;
-            padding-right: 0;
+            font-size: 0.75rem;
             word-break: break-all;
         }
         .article-url a {
@@ -377,34 +365,34 @@
         }
         .article-meta {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #5a6a7e;
         }
         .article-meta .meta-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             background: #f8f9ff;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
         }
-        .article-meta .meta-item .meta-icon { font-size: 0.8rem; }
+        .article-meta .meta-item .meta-icon { font-size: 0.75rem; }
         .article-source {
             background: linear-gradient(135deg, #667eea22, #764ba222);
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #667eea;
         }
         .article-doi {
             background: #fff3e0;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #e65100;
             direction: ltr;
             font-family: 'Courier New', monospace;
@@ -421,35 +409,31 @@
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             border: none;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.25);
+            font-size: 0.8rem;
+            box-shadow: 0 3px 12px rgba(231, 76, 60, 0.25);
             display: inline-flex;
             align-items: center;
             gap: 4px;
             align-self: flex-start;
         }
-        .btn-pdf-scihub:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.35);
-        }
         .btn-pdf-scihub:active { transform: scale(0.95); }
-        .btn-pdf-scihub .btn-icon { font-size: 0.9rem; }
+        .btn-pdf-scihub .btn-icon { font-size: 0.85rem; }
         .pdf-section {
-            margin-top: 25px;
+            margin-top: 20px;
             text-align: center;
             position: relative;
         }
         .pdf-section::before {
             content: '';
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 70%;
+            width: 60%;
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
         }
@@ -457,16 +441,16 @@
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
             border: none;
-            padding: 14px 40px;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            padding: 12px 32px;
+            border-radius: 28px;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.35);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.35);
             display: inline-flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
         }
@@ -484,17 +468,13 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        .btn-pdf-main:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(231, 76, 60, 0.45);
-        }
         .btn-pdf-main:active { transform: scale(0.97); }
-        .btn-pdf-main .pdf-icon { font-size: 1.5rem; }
-        .btn-pdf-main .pdf-sub { font-size: 0.7rem; font-weight: 400; opacity: 0.8; }
+        .btn-pdf-main .pdf-icon { font-size: 1.3rem; }
+        .btn-pdf-main .pdf-sub { font-size: 0.65rem; font-weight: 400; opacity: 0.8; }
         .loading-spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 3px solid rgba(255,255,255,0.3);
             border-top: 3px solid white;
             border-radius: 50%;
@@ -506,47 +486,47 @@
         }
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
             color: #5a6a7e;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
-        .empty-state .empty-icon { font-size: 3rem; display: block; margin-bottom: 10px; }
+        .empty-state .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
         .empty-state .empty-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #2c3e6b;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .empty-state .empty-desc {
             color: #8a9aa8;
-            max-width: 400px;
+            max-width: 350px;
             margin: 0 auto;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .error-message {
             background: #ffebee;
             color: #c62828;
-            padding: 16px 20px;
-            border-radius: 16px;
+            padding: 14px 16px;
+            border-radius: 14px;
             border: 1px solid #ef9a9a;
-            margin: 10px 0;
+            margin: 8px 0;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
-        .error-message .error-icon { font-size: 1.8rem; }
+        .error-message .error-icon { font-size: 1.6rem; }
         .error-message .error-details {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #b71c1c;
             background: #ffcdd2;
-            padding: 4px 10px;
-            border-radius: 8px;
+            padding: 3px 8px;
+            border-radius: 6px;
         }
         .error-message .retry-btn {
             background: #c62828;
             color: white;
             border: none;
-            padding: 6px 20px;
+            padding: 5px 18px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
@@ -562,7 +542,7 @@
             height: 4px;
             background: #e0e0e0;
             border-radius: 10px;
-            margin: 8px 0;
+            margin: 6px 0;
             overflow: hidden;
         }
         .progress-bar .progress-fill {
@@ -575,60 +555,60 @@
         .progress-info {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #2c3e6b;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .warning-box {
             background: #fff3e0;
             border: 1px solid #ffb74d;
-            padding: 10px 16px;
-            border-radius: 14px;
-            margin: 8px 0;
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin: 6px 0;
             color: #e65100;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.85rem;
         }
-        .warning-box .warning-icon { font-size: 1.3rem; }
+        .warning-box .warning-icon { font-size: 1.2rem; }
         .success-box {
             background: #e8f5e9;
             border: 1px solid #66bb6a;
-            padding: 10px 16px;
-            border-radius: 14px;
-            margin: 8px 0;
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin: 6px 0;
             color: #2e7d32;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.85rem;
         }
-        .success-box .success-icon { font-size: 1.3rem; }
+        .success-box .success-icon { font-size: 1.2rem; }
         @media (max-width: 992px) {
             .search-grid { grid-template-columns: 1fr 1fr; }
             .search-grid .full-width { grid-column: 1 / -1; }
         }
         @media (max-width: 768px) {
-            .container { padding: 16px; border-radius: 24px; }
-            h1 { font-size: 1.6rem; }
+            .container { padding: 14px; border-radius: 20px; }
+            h1 { font-size: 1.5rem; }
             .search-grid { grid-template-columns: 1fr; }
-            .article-card { padding: 14px 16px; }
+            .article-card { padding: 12px 14px; }
             .article-title { padding-right: 0; }
             .article-card .match-badge {
                 position: static;
                 display: inline-block;
-                margin-bottom: 6px;
-                font-size: 0.6rem;
+                margin-bottom: 4px;
+                font-size: 0.55rem;
             }
             .api-status { flex-direction: column; align-items: stretch; }
-            .btn-pdf-main { padding: 12px 30px; font-size: 1rem; }
+            .btn-pdf-main { padding: 10px 24px; font-size: 0.9rem; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 1.3rem; }
-            .container { padding: 12px; }
-            .search-section { padding: 14px; }
-            .article-card { padding: 12px 14px; }
+            h1 { font-size: 1.2rem; }
+            .container { padding: 10px; }
+            .search-section { padding: 12px; }
+            .article-card { padding: 10px 12px; }
         }
     </style>
 </head>
@@ -673,7 +653,7 @@
                 <label>
                     <span class="label-icon">🔑</span>
                     الكلمات المفتاحية (إلزامية)
-                    <span class="label-hint">(يجب أن تظهر جميعها)</span>
+                    <span class="label-hint">(يجب أن تظهر جميعها في العنوان)</span>
                 </label>
                 <input type="text" id="keywordsInput" class="keyword-input" placeholder="مثال: neural networks">
                 <span class="keyword-hint">⚠️ سيتم عرض المقالات التي تحتوي على <strong>جميع</strong> هذه الكلمات في عنوانها</span>
@@ -706,9 +686,9 @@
                 📊 عدد المقالات
                 <span class="count-number" id="resultsCount">0</span>
             </div>
-            <div style="font-size:0.8rem; color:#764ba2;">🔑 جميعها تحتوي على الكلمات</div>
+            <div style="font-size:0.7rem; color:#764ba2;">🔑 جميعها تحتوي على الكلمات</div>
         </div>
-        <div id="progressContainer" style="display:none; margin-bottom:12px;">
+        <div id="progressContainer" style="display:none; margin-bottom:10px;">
             <div class="progress-info">
                 <span id="progressStatus">جاري التحميل...</span>
                 <span id="progressText">0%</span>
@@ -857,10 +837,21 @@
 
         function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
-        // ===== دالة fetch مع مهلة وإعادة محاولة عبر Proxy =====
-        async function fetchWithRetry(url, retries = 3, timeout = 15000) {
-            let lastError = null;
-            // المحاولات المباشرة أولاً
+        // ===== قائمة خوادم البروكسي =====
+        const PROXY_LIST = [
+            // AllOrigins (يدعم JSON)
+            (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+            // CORS Proxy (يدعم JSON)
+            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+            // ThingProxy
+            (url) => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
+            // CORS Anywhere (قد يكون محدوداً)
+            (url) => `https://cors-anywhere.herokuapp.com/${encodeURIComponent(url)}`
+        ];
+
+        // ===== دالة fetch مع بروكسي تلقائي =====
+        async function fetchWithProxy(url, retries = 3, timeout = 20000) {
+            // المحاولات المباشرة أولاً (على الكمبيوتر تعمل مباشرة)
             for (let attempt = 0; attempt < retries; attempt++) {
                 try {
                     const controller = new AbortController();
@@ -869,7 +860,7 @@
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
-                            'User-Agent': 'Mozilla/5.0 (compatible; AcademicSearch/2.0; +https://github.com)'
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
                         },
                         mode: 'cors',
                         credentials: 'omit',
@@ -881,35 +872,27 @@
                     }
                     return await response.json();
                 } catch (error) {
-                    lastError = error;
-                    // إذا كان الخطأ بسبب CORS أو Network، ننتظر ثم نعيد المحاولة
-                    if (error.name === 'AbortError') {
-                        console.warn('طلب مهلة، إعادة محاولة...');
-                    } else if (error.message.includes('CORS') || error.message.includes('NetworkError')) {
-                        console.warn('خطأ في الشبكة/CORS، إعادة محاولة...');
-                    } else {
-                        // أخطاء أخرى (مثل 400) لا نعيد المحاولة
-                        throw error;
+                    console.warn(`محاولة مباشرة ${attempt+1} فشلت:`, error.message);
+                    if (attempt < retries - 1) {
+                        await delay(1500 * (attempt + 1));
                     }
-                    await delay(1000 * (attempt + 1));
                 }
             }
 
-            // إذا فشلنا بعد المحاولات المباشرة، نحاول عبر Proxy
-            console.warn('جميع المحاولات المباشرة فشلت، نحاول عبر Proxy...');
-            const proxyUrls = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-                `https://corsproxy.io/?${encodeURIComponent(url)}`
-            ];
-            for (let proxyUrl of proxyUrls) {
+            // إذا فشلت المحاولات المباشرة، نجرب البروكسي
+            console.warn('المحاولات المباشرة فشلت، نجرب البروكسي...');
+            
+            for (let proxyFn of PROXY_LIST) {
                 try {
+                    const proxyUrl = proxyFn(url);
+                    console.log('محاولة بروكسي:', proxyUrl);
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 20000);
+                    const timeoutId = setTimeout(() => controller.abort(), timeout);
                     const response = await fetch(proxyUrl, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
-                            'User-Agent': 'Mozilla/5.0 (compatible; AcademicSearch/2.0)'
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
                         },
                         mode: 'cors',
                         credentials: 'omit',
@@ -917,28 +900,41 @@
                     });
                     clearTimeout(timeoutId);
                     if (!response.ok) {
+                        console.warn('بروكسي فشل مع HTTP', response.status);
                         continue;
                     }
-                    const data = await response.json();
-                    // allorigins يعيد البيانات في حقل contents
-                    if (data && data.contents) {
-                        try {
-                            return JSON.parse(data.contents);
-                        } catch (e) {
-                            // إذا لم يكن JSON صالحاً، نرمي خطأ
-                            throw new Error('Proxy data not valid JSON');
+                    const data = await response.text();
+                    // بعض البروكسيات ترجع JSON داخل حقل contents
+                    try {
+                        // محاولة تحويل مباشر
+                        const parsed = JSON.parse(data);
+                        // إذا كان بالصيغة {contents: "..."} نستخرج المحتوى
+                        if (parsed.contents) {
+                            return JSON.parse(parsed.contents);
                         }
+                        return parsed;
+                    } catch (e) {
+                        // إذا كان النص يحتوي على JSON بداخله
+                        if (data.startsWith('{') || data.startsWith('[')) {
+                            try {
+                                return JSON.parse(data);
+                            } catch (e2) {
+                                console.warn('فشل تحليل JSON من البروكسي');
+                            }
+                        }
+                        console.warn('البروكسي لم يعد JSON صحيحاً');
                     }
-                    return data;
                 } catch (error) {
-                    console.warn('Proxy فشل:', proxyUrl, error);
-                    continue;
+                    console.warn('بروكسي فشل:', error.message);
+                    await delay(1000);
                 }
             }
-            throw new Error('فشل الاتصال حتى عبر Proxy. تأكد من اتصالك بالإنترنت أو حاول لاحقاً.');
+
+            // إذا وصلنا هنا، كل المحاولات فشلت
+            throw new Error('فشل الاتصال حتى عبر البروكسي. تأكد من اتصالك بالإنترنت أو استخدم VPN.');
         }
 
-        // ===== جلب المقالات مع تحسين الاتصال =====
+        // ===== جلب المقالات =====
         async function fetchArticles(topic, keywords, fromYear, toYear, desiredCount) {
             const keywordList = keywords.trim().split(/\s+/).filter(w => w.length > 2);
             if (keywordList.length === 0) {
@@ -956,7 +952,6 @@
             let hasMore = true;
             let page = 0;
             const maxPages = 200;
-            const MAX_RETRIES = 2;
 
             progressContainer.style.display = 'block';
             progressFill.style.width = '0%';
@@ -967,18 +962,11 @@
                 const url = `https://api.crossref.org/works?query=${encodedQuery}&filter=from-pub-date:${fromYear},until-pub-date:${toYear}&rows=${rowsPerPage}&offset=${offset}&sort=relevance&order=desc`;
 
                 let data = null;
-                let success = false;
-                for (let retry = 0; retry < MAX_RETRIES && !success; retry++) {
-                    try {
-                        data = await fetchWithRetry(url, 2, 15000);
-                        success = true;
-                    } catch (error) {
-                        console.warn(`محاولة ${retry+1} فشلت:`, error);
-                        if (retry === MAX_RETRIES - 1) {
-                            throw new Error(`فشل جلب البيانات: ${error.message}`);
-                        }
-                        await delay(2000);
-                    }
+                try {
+                    // استخدام الدالة الجديدة مع البروكسي
+                    data = await fetchWithProxy(url, 2, 20000);
+                } catch (error) {
+                    throw new Error(`فشل جلب البيانات: ${error.message}`);
                 }
 
                 if (!data || !data.message || !data.message.items || data.message.items.length === 0) {
@@ -1096,7 +1084,7 @@
                                 <button class="btn-pdf-scihub" onclick="openSciHubForDOI('${displayDoi}');">
                                     <span class="btn-icon">📄</span> PDF
                                 </button>
-                            ` : '<span style="color:#999; font-size:0.8rem;">🚫 لا يوجد DOI</span>'}
+                            ` : '<span style="color:#999; font-size:0.75rem;">🚫 لا يوجد DOI</span>'}
                         </div>
                     </div>
                 `;
@@ -1153,9 +1141,9 @@
                 console.error('Search error:', error);
                 let errorMsg = error.message || 'حدث خطأ غير متوقع.';
                 let details = '';
-                if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError') || errorMsg.includes('CORS') || errorMsg.includes('فشل الاتصال')) {
+                if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError') || errorMsg.includes('CORS') || errorMsg.includes('فشل الاتصال') || errorMsg.includes('فشل جلب البيانات')) {
                     errorMsg = 'فشل الاتصال بالخادم. قد يكون السبب: ضعف الشبكة، أو حظر الخدمة، أو مشكلة في المتصفح.';
-                    details = '💡 تأكد من اتصالك بالإنترنت، وجرب استخدام شبكة Wi-Fi بدلاً من بيانات الهاتف، أو استخدم VPN.';
+                    details = '💡 تأكد من اتصالك بالإنترنت، وجرب استخدام شبكة Wi-Fi بدلاً من بيانات الهاتف، أو استخدم VPN. إذا استمرت المشكلة، حاول تقليل عدد المقالات المطلوبة.';
                 } else if (errorMsg.includes('HTTP 400')) {
                     details = 'تأكد من أن الكلمات المفتاحية لا تحتوي على رموز خاصة غير مدعومة.';
                 } else if (errorMsg.includes('HTTP 429')) {
