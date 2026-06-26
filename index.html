@@ -422,55 +422,6 @@
         }
         .btn-pdf-scihub:active { transform: scale(0.95); }
         .btn-pdf-scihub .btn-icon { font-size: 0.85rem; }
-        .pdf-section {
-            margin-top: 20px;
-            text-align: center;
-            position: relative;
-        }
-        .pdf-section::before {
-            content: '';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
-        }
-        .btn-pdf-main {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            border-radius: 28px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.35);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-pdf-main::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: rotate 8s linear infinite;
-        }
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .btn-pdf-main:active { transform: scale(0.97); }
-        .btn-pdf-main .pdf-icon { font-size: 1.3rem; }
-        .btn-pdf-main .pdf-sub { font-size: 0.65rem; font-weight: 400; opacity: 0.8; }
         .loading-spinner {
             display: inline-block;
             width: 18px;
@@ -602,7 +553,6 @@
                 font-size: 0.55rem;
             }
             .api-status { flex-direction: column; align-items: stretch; }
-            .btn-pdf-main { padding: 10px 24px; font-size: 0.9rem; }
         }
         @media (max-width: 480px) {
             h1 { font-size: 1.2rem; }
@@ -706,6 +656,9 @@
             </div>
         </div>
     </div>
+
+</div>
+
 <script>
     (function() {
         // ===== عناصر DOM =====
@@ -717,7 +670,6 @@
         const searchBtn = document.getElementById('searchBtn');
         const resultsGrid = document.getElementById('resultsGrid');
         const resultsCount = document.getElementById('resultsCount');
-        const pdfBtn = document.getElementById('pdfBtn');
         const progressContainer = document.getElementById('progressContainer');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
@@ -829,19 +781,14 @@
 
         // ===== قائمة خوادم البروكسي =====
         const PROXY_LIST = [
-            // AllOrigins (يدعم JSON)
             (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            // CORS Proxy (يدعم JSON)
             (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-            // ThingProxy
             (url) => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
-            // CORS Anywhere (قد يكون محدوداً)
             (url) => `https://cors-anywhere.herokuapp.com/${encodeURIComponent(url)}`
         ];
 
         // ===== دالة fetch مع بروكسي تلقائي =====
         async function fetchWithProxy(url, retries = 3, timeout = 20000) {
-            // المحاولات المباشرة أولاً (على الكمبيوتر تعمل مباشرة)
             for (let attempt = 0; attempt < retries; attempt++) {
                 try {
                     const controller = new AbortController();
@@ -869,7 +816,6 @@
                 }
             }
 
-            // إذا فشلت المحاولات المباشرة، نجرب البروكسي
             console.warn('المحاولات المباشرة فشلت، نجرب البروكسي...');
             
             for (let proxyFn of PROXY_LIST) {
@@ -894,17 +840,13 @@
                         continue;
                     }
                     const data = await response.text();
-                    // بعض البروكسيات ترجع JSON داخل حقل contents
                     try {
-                        // محاولة تحويل مباشر
                         const parsed = JSON.parse(data);
-                        // إذا كان بالصيغة {contents: "..."} نستخرج المحتوى
                         if (parsed.contents) {
                             return JSON.parse(parsed.contents);
                         }
                         return parsed;
                     } catch (e) {
-                        // إذا كان النص يحتوي على JSON بداخله
                         if (data.startsWith('{') || data.startsWith('[')) {
                             try {
                                 return JSON.parse(data);
@@ -912,7 +854,6 @@
                                 console.warn('فشل تحليل JSON من البروكسي');
                             }
                         }
-                        console.warn('البروكسي لم يعد JSON صحيحاً');
                     }
                 } catch (error) {
                     console.warn('بروكسي فشل:', error.message);
@@ -920,7 +861,6 @@
                 }
             }
 
-            // إذا وصلنا هنا، كل المحاولات فشلت
             throw new Error('فشل الاتصال حتى عبر البروكسي. تأكد من اتصالك بالإنترنت أو استخدم VPN.');
         }
 
@@ -953,7 +893,6 @@
 
                 let data = null;
                 try {
-                    // استخدام الدالة الجديدة مع البروكسي
                     data = await fetchWithProxy(url, 2, 20000);
                 } catch (error) {
                     throw new Error(`فشل جلب البيانات: ${error.message}`);
@@ -1158,16 +1097,6 @@
                 progressContainer.style.display = 'none';
             }
         }
-
-        // ===== زر PDF الرئيسي =====
-        function openSciHubMain() {
-            window.open('https://sci-hub.box/', '_blank');
-            setTimeout(() => {
-                alert('📄 تم فتح Sci-Hub. يمكنك لصق DOI للبحث عن المقالة.');
-            }, 500);
-        }
-
-        pdfBtn.addEventListener('click', openSciHubMain);
 
         // ===== أحداث =====
         searchBtn.addEventListener('click', performSearch);
