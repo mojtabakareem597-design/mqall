@@ -622,460 +622,419 @@
 </div>
 
 <script>
-    (function() {
-        // ===== عناصر DOM =====
-        const topicInput = document.getElementById('topicInput');
-        const keywordsInput = document.getElementById('keywordsInput');
-        const yearFrom = document.getElementById('yearFrom');
-        const yearTo = document.getElementById('yearTo');
-        const desiredCountInput = document.getElementById('desiredCount');
-        const searchBtn = document.getElementById('searchBtn');
-        const resultsGrid = document.getElementById('resultsGrid');
-        const resultsCount = document.getElementById('resultsCount');
-        const progressContainer = document.getElementById('progressContainer');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const progressStatus = document.getElementById('progressStatus');
-        const messageContainer = document.getElementById('messageContainer');
+(function() {
+    // ===== عناصر DOM =====
+    const topicInput = document.getElementById('topicInput');
+    const keywordsInput = document.getElementById('keywordsInput');
+    const yearFrom = document.getElementById('yearFrom');
+    const yearTo = document.getElementById('yearTo');
+    const desiredCountInput = document.getElementById('desiredCount');
+    const searchBtn = document.getElementById('searchBtn');
+    const resultsGrid = document.getElementById('resultsGrid');
+    const resultsCount = document.getElementById('resultsCount');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const progressStatus = document.getElementById('progressStatus');
+    const messageContainer = document.getElementById('messageContainer');
 
-        // ===== قائمة المصادر (50) =====
-        const SOURCE_MAP = [
-            { name: 'Google Scholar', keywords: ['google scholar'] },
-            { name: 'Scopus', keywords: ['scopus'] },
-            { name: 'Web of Science', keywords: ['web of science', 'clarivate'] },
-            { name: 'PubMed', keywords: ['pubmed', 'pubmed central', 'pmc', 'medline', 'nlm'] },
-            { name: 'ScienceDirect', keywords: ['sciencedirect', 'elsevier'] },
-            { name: 'SpringerLink', keywords: ['springer'] },
-            { name: 'Wiley Online Library', keywords: ['wiley'] },
-            { name: 'IEEE Xplore', keywords: ['ieee'] },
-            { name: 'JSTOR', keywords: ['jstor'] },
-            { name: 'Semantic Scholar', keywords: ['semantic scholar'] },
-            { name: 'Taylor & Francis Online', keywords: ['taylor & francis', 'tandf'] },
-            { name: 'Nature Portfolio', keywords: ['nature publishing', 'nature portfolio', 'nature.com'] },
-            { name: 'DOAJ', keywords: ['doaj'] },
-            { name: 'MDPI', keywords: ['mdpi'] },
-            { name: 'PLOS', keywords: ['plos'] },
-            { name: 'Oxford Academic', keywords: ['oxford', 'oup'] },
-            { name: 'Cambridge Core', keywords: ['cambridge'] },
-            { name: 'SAGE Journals', keywords: ['sage'] },
-            { name: 'Elsevier', keywords: ['elsevier'] },
-            { name: 'Cell Press', keywords: ['cell', 'cell press'] },
-            { name: 'BMJ Journals', keywords: ['bmj', 'british medical journal'] },
-            { name: 'The Lancet', keywords: ['lancet'] },
-            { name: 'Cochrane Library', keywords: ['cochrane'] },
-            { name: 'ERIC', keywords: ['eric'] },
-            { name: 'CORE', keywords: ['core'] },
-            { name: 'BASE', keywords: ['base'] },
-            { name: 'OpenAlex', keywords: ['openalex'] },
-            { name: 'ResearchGate', keywords: ['researchgate'] },
-            { name: 'Academia.edu', keywords: ['academia'] },
-            { name: 'SSRN', keywords: ['ssrn'] },
-            { name: 'arXiv', keywords: ['arxiv'] },
-            { name: 'bioRxiv', keywords: ['biorxiv'] },
-            { name: 'medRxiv', keywords: ['medrxiv'] },
-            { name: 'DOAB', keywords: ['doab'] },
-            { name: 'OATD', keywords: ['oatd'] },
-            { name: 'Zenodo', keywords: ['zenodo'] },
-            { name: 'Figshare', keywords: ['figshare'] },
-            { name: 'Europe PMC', keywords: ['europe pmc'] },
-            { name: 'PubMed Central (PMC)', keywords: ['pubmed central', 'pmc'] },
-            { name: 'Hindawi', keywords: ['hindawi'] },
-            { name: 'Frontiers', keywords: ['frontiers'] },
-            { name: 'Emerald Insight', keywords: ['emerald'] },
-            { name: 'De Gruyter', keywords: ['degruyter', 'de gruyter'] },
-            { name: 'SPIE Digital Library', keywords: ['spie'] },
-            { name: 'ACM Digital Library', keywords: ['acm'] },
-            { name: 'Project MUSE', keywords: ['muse'] },
-            { name: 'AGRIS', keywords: ['agris'] },
-            { name: 'RePEc', keywords: ['repec'] },
-            { name: 'Dimensions', keywords: ['dimensions'] },
-            { name: 'WorldCat', keywords: ['worldcat'] }
-        ];
+    // ===== قائمة المصادر (50) =====
+    const SOURCE_MAP = [
+        { name: 'Google Scholar', keywords: ['google scholar'] },
+        { name: 'Scopus', keywords: ['scopus'] },
+        { name: 'Web of Science', keywords: ['web of science', 'clarivate'] },
+        { name: 'PubMed', keywords: ['pubmed', 'pubmed central', 'pmc', 'medline', 'nlm'] },
+        { name: 'ScienceDirect', keywords: ['sciencedirect', 'elsevier'] },
+        { name: 'SpringerLink', keywords: ['springer'] },
+        { name: 'Wiley Online Library', keywords: ['wiley'] },
+        { name: 'IEEE Xplore', keywords: ['ieee'] },
+        { name: 'JSTOR', keywords: ['jstor'] },
+        { name: 'Semantic Scholar', keywords: ['semantic scholar'] },
+        { name: 'Taylor & Francis Online', keywords: ['taylor & francis', 'tandf'] },
+        { name: 'Nature Portfolio', keywords: ['nature publishing', 'nature portfolio', 'nature.com'] },
+        { name: 'DOAJ', keywords: ['doaj'] },
+        { name: 'MDPI', keywords: ['mdpi'] },
+        { name: 'PLOS', keywords: ['plos'] },
+        { name: 'Oxford Academic', keywords: ['oxford', 'oup'] },
+        { name: 'Cambridge Core', keywords: ['cambridge'] },
+        { name: 'SAGE Journals', keywords: ['sage'] },
+        { name: 'Elsevier', keywords: ['elsevier'] },
+        { name: 'Cell Press', keywords: ['cell', 'cell press'] },
+        { name: 'BMJ Journals', keywords: ['bmj', 'british medical journal'] },
+        { name: 'The Lancet', keywords: ['lancet'] },
+        { name: 'Cochrane Library', keywords: ['cochrane'] },
+        { name: 'ERIC', keywords: ['eric'] },
+        { name: 'CORE', keywords: ['core'] },
+        { name: 'BASE', keywords: ['base'] },
+        { name: 'OpenAlex', keywords: ['openalex'] },
+        { name: 'ResearchGate', keywords: ['researchgate'] },
+        { name: 'Academia.edu', keywords: ['academia'] },
+        { name: 'SSRN', keywords: ['ssrn'] },
+        { name: 'arXiv', keywords: ['arxiv'] },
+        { name: 'bioRxiv', keywords: ['biorxiv'] },
+        { name: 'medRxiv', keywords: ['medrxiv'] },
+        { name: 'DOAB', keywords: ['doab'] },
+        { name: 'OATD', keywords: ['oatd'] },
+        { name: 'Zenodo', keywords: ['zenodo'] },
+        { name: 'Figshare', keywords: ['figshare'] },
+        { name: 'Europe PMC', keywords: ['europe pmc'] },
+        { name: 'PubMed Central (PMC)', keywords: ['pubmed central', 'pmc'] },
+        { name: 'Hindawi', keywords: ['hindawi'] },
+        { name: 'Frontiers', keywords: ['frontiers'] },
+        { name: 'Emerald Insight', keywords: ['emerald'] },
+        { name: 'De Gruyter', keywords: ['degruyter', 'de gruyter'] },
+        { name: 'SPIE Digital Library', keywords: ['spie'] },
+        { name: 'ACM Digital Library', keywords: ['acm'] },
+        { name: 'Project MUSE', keywords: ['muse'] },
+        { name: 'AGRIS', keywords: ['agris'] },
+        { name: 'RePEc', keywords: ['repec'] },
+        { name: 'Dimensions', keywords: ['dimensions'] },
+        { name: 'WorldCat', keywords: ['worldcat'] }
+    ];
 
-        function detectSource(item) {
-            const publisher = (item.publisher || '').toLowerCase();
-            const container = (item['container-title'] && item['container-title'][0]) ? item['container-title'][0].toLowerCase() : '';
-            const combined = publisher + ' ' + container;
+    function detectSource(item) {
+        const publisher = (item.publisher || '').toLowerCase();
+        const container = (item['container-title'] && item['container-title'][0]) ? item['container-title'][0].toLowerCase() : '';
+        const combined = publisher + ' ' + container;
+        for (let src of SOURCE_MAP) {
+            for (let kw of src.keywords) {
+                if (combined.includes(kw)) return src.name;
+            }
+        }
+        if (item.publisher) {
+            const pubLower = item.publisher.toLowerCase();
             for (let src of SOURCE_MAP) {
                 for (let kw of src.keywords) {
-                    if (combined.includes(kw)) {
-                        return src.name;
-                    }
+                    if (pubLower.includes(kw)) return src.name;
                 }
             }
-            if (item.publisher) {
-                const pubLower = item.publisher.toLowerCase();
-                for (let src of SOURCE_MAP) {
-                    for (let kw of src.keywords) {
-                        if (pubLower.includes(kw)) {
-                            return src.name;
-                        }
-                    }
-                }
+        }
+        return null;
+    }
+
+    function cleanAndValidateDOI(doi) {
+        if (!doi) return null;
+        let cleaned = doi.trim().split('?')[0].split('#')[0];
+        if (!cleaned.startsWith('10.') || !cleaned.includes('/')) return null;
+        const parts = cleaned.split('/');
+        if (parts.length < 2) return null;
+        const prefix = parts[0].replace('10.', '');
+        if (!/^\d+$/.test(prefix) || prefix.length < 4) return null;
+        return cleaned;
+    }
+
+    function openSciHubForDOI(doi) {
+        if (!doi) return;
+        const cleanDoi = cleanAndValidateDOI(doi);
+        if (!cleanDoi) { alert('⚠️ هذا DOI غير صالح.'); return; }
+        window.open('https://sci-hub.box/' + encodeURIComponent(cleanDoi), '_blank');
+    }
+    window.openSciHubForDOI = openSciHubForDOI;
+
+    function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+    // =====================================================================
+    // الإصلاح الرئيسي: دالة fetch مُحسَّنة للهواتف
+    // المشكلة: الهواتف ترفض Custom Headers مثل User-Agent مما يُفشل CORS preflight
+    // الحل: إرسال طلبات بسيطة بدون headers إضافية + قائمة بروكسيات مُحسَّنة
+    // =====================================================================
+
+    // قائمة البروكسيات مُرتَّبة حسب توافقها مع الهواتف
+    const PROXY_LIST = [
+        // allorigins - الأفضل توافقاً مع الهواتف (لا يحتاج headers)
+        (url) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+        // corsproxy.io - يدعم الهواتف
+        (url) => 'https://corsproxy.io/?' + encodeURIComponent(url),
+        // cors.sh - موثوق
+        (url) => 'https://proxy.cors.sh/' + url,
+        // thingproxy
+        (url) => 'https://thingproxy.freeboard.io/fetch/' + url,
+        // codetabs
+        (url) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
+    ];
+
+    // كشف نوع الجهاز
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    // دالة fetch أساسية بدون headers إضافية (ضروري للهواتف)
+    async function simpleFetch(url, timeoutMs) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            // على الهواتف: لا نضيف أي headers مخصصة تماماً لتجنب CORS preflight
+            const options = { signal: controller.signal };
+            if (!isMobile) {
+                options.headers = { 'Accept': 'application/json' };
             }
-            return null;
+            const response = await fetch(url, options);
+            clearTimeout(timer);
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            return await response.text();
+        } finally {
+            clearTimeout(timer);
+        }
+    }
+
+    async function fetchWithSmartProxy(url, timeout) {
+        timeout = timeout || (isMobile ? 30000 : 20000);
+
+        // === المحاولة المباشرة أولاً ===
+        // Crossref API يدعم CORS بشكل كامل، لكن بعض شبكات الهواتف تحجبه
+        try {
+            const text = await simpleFetch(url, timeout);
+            return JSON.parse(text);
+        } catch (e) {
+            console.warn('المحاولة المباشرة فشلت:', e.message);
         }
 
-        function cleanAndValidateDOI(doi) {
-            if (!doi) return null;
-            let cleaned = doi.trim().split('?')[0].split('#')[0];
-            if (!cleaned.startsWith('10.') || !cleaned.includes('/')) return null;
-            const parts = cleaned.split('/');
-            if (parts.length < 2) return null;
-            const prefix = parts[0].replace('10.', '');
-            if (!/^\d+$/.test(prefix) || prefix.length < 4) return null;
-            return cleaned;
-        }
+        // على الهواتف نزيد وقت الانتظار قبل البروكسي
+        if (isMobile) await delay(500);
 
-        function openSciHubForDOI(doi) {
-            if (!doi) return;
-            const cleanDoi = cleanAndValidateDOI(doi);
-            if (!cleanDoi) {
-                alert('⚠️ هذا DOI غير صالح.');
-                return;
-            }
-            const sciHubUrl = `https://sci-hub.box/${encodeURIComponent(cleanDoi)}`;
-            window.open(sciHubUrl, '_blank');
-        }
-        window.openSciHubForDOI = openSciHubForDOI;
+        // === تجربة البروكسيات واحداً تلو الآخر ===
+        for (let i = 0; i < PROXY_LIST.length; i++) {
+            const proxyUrl = PROXY_LIST[i](url);
+            try {
+                console.log('تجربة بروكسي ' + (i + 1) + ':', proxyUrl.substring(0, 60) + '...');
+                const text = await simpleFetch(proxyUrl, timeout);
 
-        function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
-
-        // ===== قائمة خوادم البروكسي مع تنويع عشوائي =====
-        const PROXY_LIST = [
-            (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-            (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-            (url) => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
-            (url) => `https://cors-anywhere.herokuapp.com/${encodeURIComponent(url)}`,
-            (url) => `https://cors-proxy.htmldriven.com/?url=${encodeURIComponent(url)}`,
-            (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-        ];
-
-        // خلط عشوائي للقائمة لتوزيع الحمل
-        function shuffleArray(arr) {
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
-            }
-            return arr;
-        }
-
-        // ===== دالة fetch مع بروكسي ذكي =====
-        async function fetchWithSmartProxy(url, retries = 3, timeout = 25000) {
-            // محاولة مباشرة أولاً (على الكمبيوتر غالباً تنجح)
-            for (let attempt = 0; attempt < 2; attempt++) {
+                // بعض البروكسيات تُغلِّف الاستجابة في كائن { contents: "..." }
+                let parsed;
                 try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), timeout);
-                    const response = await fetch(url, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                            'Cache-Control': 'no-cache'
-                        },
-                        mode: 'cors',
-                        credentials: 'omit',
-                        signal: controller.signal
-                    });
-                    clearTimeout(timeoutId);
-                    if (!response.ok) {
-                        throw new Error(`HTTP ${response.status}`);
-                    }
-                    return await response.json();
-                } catch (error) {
-                    console.warn(`مباشر ${attempt+1} فشل:`, error.message);
-                    if (attempt === 0) await delay(1500 + Math.random() * 1000);
+                    parsed = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('الاستجابة ليست JSON');
                 }
-            }
 
-            // تجربة البروكسيات بشكل عشوائي
-            const shuffledProxies = shuffleArray([...PROXY_LIST]);
-            for (let proxyFn of shuffledProxies) {
-                try {
-                    const proxyUrl = proxyFn(url);
-                    console.log('محاولة بروكسي:', proxyUrl);
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), timeout);
-                    const response = await fetch(proxyUrl, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-                        },
-                        mode: 'cors',
-                        credentials: 'omit',
-                        signal: controller.signal
-                    });
-                    clearTimeout(timeoutId);
-                    if (!response.ok) {
-                        console.warn('بروكسي فشل مع HTTP', response.status);
-                        continue;
-                    }
-                    const data = await response.text();
+                // إذا كانت مُغلَّفة في contents
+                if (parsed && parsed.contents) {
                     try {
-                        const parsed = JSON.parse(data);
-                        if (parsed.contents) {
-                            return JSON.parse(parsed.contents);
-                        }
-                        return parsed;
+                        return JSON.parse(parsed.contents);
                     } catch (e) {
-                        if (data.startsWith('{') || data.startsWith('[')) {
-                            try { return JSON.parse(data); } catch (e2) { }
-                        }
+                        throw new Error('محتوى contents ليس JSON صالحاً');
                     }
-                } catch (error) {
-                    console.warn('بروكسي فشل:', error.message);
-                    await delay(1000 + Math.random() * 1500);
                 }
+
+                // التحقق من أن الاستجابة هي بيانات Crossref الفعلية
+                if (parsed && parsed.message) return parsed;
+                if (parsed && parsed.status === 'ok') return parsed;
+
+                throw new Error('استجابة غير متوقعة من البروكسي');
+
+            } catch (e) {
+                console.warn('بروكسي ' + (i + 1) + ' فشل:', e.message);
+                // انتظار قصير بين المحاولات على الهواتف
+                if (i < PROXY_LIST.length - 1) await delay(isMobile ? 800 : 400);
             }
-            throw new Error('فشل الاتصال بجميع البروكسيات. يرجى المحاولة لاحقاً.');
         }
 
-        // ===== جلب المقالات مع تحسينات لتجنب الحظر =====
-        async function fetchArticles(topic, keywords, fromYear, toYear, desiredCount) {
-            const keywordList = keywords.trim().split(/\s+/).filter(w => w.length > 2);
-            if (keywordList.length === 0) {
-                throw new Error('الرجاء إدخال كلمات مفتاحية صحيحة (أكثر من حرفين)');
+        throw new Error('فشل الاتصال بجميع الخوادم. تأكد من اتصالك بالإنترنت وحاول مجدداً.');
+    }
+
+    // ===== جلب المقالات =====
+    async function fetchArticles(topic, keywords, fromYear, toYear, desiredCount) {
+        const keywordList = keywords.trim().split(/\s+/).filter(w => w.length > 2);
+        if (keywordList.length === 0) throw new Error('الرجاء إدخال كلمات مفتاحية صحيحة (أكثر من حرفين)');
+
+        const isUnlimited = (desiredCount === 0);
+        const targetCount = isUnlimited ? 999999 : desiredCount;
+        const searchQuery = topic.trim() || keywords.trim();
+        const encodedQuery = encodeURIComponent(searchQuery);
+        const rowsPerPage = isMobile ? 50 : 100; // نقلل الحجم على الهواتف لتسريع الاستجابة
+        let offset = 0;
+        let allMatched = [];
+        let totalFetched = 0;
+        let hasMore = true;
+        let page = 0;
+        const maxPages = isMobile ? 100 : 200;
+
+        progressContainer.style.display = 'block';
+        progressFill.style.width = '0%';
+        progressText.textContent = '0%';
+        progressStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري البحث... (الهدف: ' + (isUnlimited ? 'جميع المطابقات' : targetCount) + ')';
+
+        while (hasMore && page < maxPages && allMatched.length < targetCount) {
+            const url = 'https://api.crossref.org/works?query=' + encodedQuery +
+                '&filter=from-pub-date:' + fromYear + ',until-pub-date:' + toYear +
+                '&rows=' + rowsPerPage + '&offset=' + offset + '&sort=relevance&order=desc' +
+                '&mailto=search@onrray.com'; // إضافة mailto تُحسِّن أولوية الطلب في Crossref
+
+            let data;
+            try {
+                data = await fetchWithSmartProxy(url);
+            } catch (error) {
+                throw new Error('فشل جلب البيانات: ' + error.message);
             }
 
-            const isUnlimited = (desiredCount === 0);
-            const targetCount = isUnlimited ? 999999 : desiredCount;
-            const searchQuery = topic.trim() || keywords.trim();
-            const encodedQuery = encodeURIComponent(searchQuery);
-            const rowsPerPage = 100;
-            let offset = 0;
-            let allMatched = [];
-            let totalFetched = 0;
-            let hasMore = true;
-            let page = 0;
-            const maxPages = 200;
-
-            progressContainer.style.display = 'block';
-            progressFill.style.width = '0%';
-            progressText.textContent = '0%';
-            progressStatus.innerHTML = `<i class="fas fa-spinner fa-spin"></i> جاري البحث... (الهدف: ${isUnlimited ? 'جميع المطابقات' : targetCount})`;
-
-            while (hasMore && page < maxPages && allMatched.length < targetCount) {
-                const url = `https://api.crossref.org/works?query=${encodedQuery}&filter=from-pub-date:${fromYear},until-pub-date:${toYear}&rows=${rowsPerPage}&offset=${offset}&sort=relevance&order=desc`;
-
-                let data = null;
-                try {
-                    data = await fetchWithSmartProxy(url, 2, 25000);
-                } catch (error) {
-                    throw new Error(`فشل جلب البيانات: ${error.message}`);
-                }
-
-                if (!data || !data.message || !data.message.items || data.message.items.length === 0) {
-                    hasMore = false;
-                    break;
-                }
-
-                const items = data.message.items;
-                totalFetched += items.length;
-                const keywordLower = keywordList.map(k => k.toLowerCase());
-
-                const matched = items.filter(item => {
-                    const sourceName = detectSource(item);
-                    if (!sourceName) return false;
-                    const rawDoi = item['DOI'] || '';
-                    const validDoi = cleanAndValidateDOI(rawDoi);
-                    if (!validDoi) return false;
-                    const title = (item.title && item.title[0]) ? item.title[0].toLowerCase() : '';
-                    if (!title) return false;
-                    return keywordLower.every(kw => title.includes(kw));
-                });
-
-                const converted = matched.map(item => {
-                    const source = detectSource(item) || 'مصدر معتمد';
-                    let year = 'N/A';
-                    if (item['issued'] && item['issued']['date-parts'] && item['issued']['date-parts'][0]) {
-                        year = item['issued']['date-parts'][0][0] || 'N/A';
-                    }
-                    let titleDisplay = item.title[0] || 'عنوان غير متوفر';
-                    const validDoi = cleanAndValidateDOI(item['DOI']);
-                    let journal = (item['container-title'] && item['container-title'][0]) || 'N/A';
-                    let articleUrl = item['URL'] || null;
-                    if (!articleUrl && validDoi) {
-                        articleUrl = `https://doi.org/${encodeURIComponent(validDoi)}`;
-                    }
-                    return { title: titleDisplay, source, year, doi: validDoi, journal, url: articleUrl };
-                });
-
-                allMatched = allMatched.concat(converted);
-
-                const progress = Math.min(((page + 1) / 20) * 100, 95);
-                progressFill.style.width = progress + '%';
-                progressText.textContent = Math.round(progress) + '%';
-                progressStatus.innerHTML = `<i class="fas fa-spinner fa-spin"></i> تم جلب ${totalFetched} مقالة، تم العثور على ${allMatched.length} مطابقة...`;
-
-                if (items.length < rowsPerPage) {
-                    hasMore = false;
-                } else {
-                    offset += rowsPerPage;
-                    page++;
-                    // تأخير متزايد مع عامل عشوائي لتجنب الحظر
-                    const delayTime = 500 + Math.random() * 1000 + page * 100;
-                    await delay(delayTime);
-                }
+            if (!data || !data.message || !data.message.items || data.message.items.length === 0) {
+                hasMore = false;
+                break;
             }
 
-            progressContainer.style.display = 'none';
+            const items = data.message.items;
+            totalFetched += items.length;
+            const keywordLower = keywordList.map(k => k.toLowerCase());
 
-            messageContainer.innerHTML = '';
-            if (allMatched.length === 0) {
-                messageContainer.innerHTML = `<div class="warning-box"><i class="fas fa-exclamation-triangle warning-icon"></i><div><strong>تنبيه:</strong> لم يتم العثور على مقالات مطابقة. جرب كلمات مفتاحية مختلفة أو وسّع نطاق السنوات.</div></div>`;
-            } else if (allMatched.length < targetCount && !isUnlimited) {
-                messageContainer.innerHTML = `<div class="warning-box"><i class="fas fa-exclamation-circle warning-icon"></i><div><strong>تنبيه:</strong> تم العثور على ${allMatched.length} مقالة فقط (العدد المطلوب ${targetCount}). قد لا يتوفر عدد كافٍ.</div></div>`;
-            } else {
-                messageContainer.innerHTML = `<div class="success-box"><i class="fas fa-check-circle success-icon"></i><div><strong>نجاح:</strong> تم العثور على ${allMatched.length} مقالة. يمكنك تحميل PDF بالضغط على زر "PDF".</div></div>`;
-            }
-
-            return allMatched;
-        }
-
-        // ===== عرض النتائج =====
-        function displayArticles(articles) {
-            if (!articles || articles.length === 0) {
-                resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon"><i class="fas fa-frown-open"></i></span><div class="empty-title">لا توجد نتائج</div><div class="empty-desc">لم نجد مقالات مطابقة من المصادر المعتمدة.</div></div>`;
-                resultsCount.textContent = '0';
-                return;
-            }
-
-            resultsCount.textContent = articles.length;
-            const keywordWords = keywordsInput.value.trim().split(/\s+/).filter(w => w.length > 2);
-
-            let html = '';
-            articles.forEach((article) => {
-                let highlightedTitle = article.title;
-                keywordWords.forEach(word => {
-                    const regex = new RegExp(`(${word})`, 'gi');
-                    highlightedTitle = highlightedTitle.replace(regex, '<span class="keyword-highlight">$1</span>');
-                });
-
-                const doiValid = article.doi && cleanAndValidateDOI(article.doi) !== null;
-                const displayDoi = doiValid ? article.doi : 'غير متوفر';
-                const articleUrl = article.url || '#';
-
-                html += `
-                    <div class="article-card" data-doi="${article.doi}">
-                        <div class="match-badge"><i class="fas fa-check-circle"></i> مصدر معتمد</div>
-                        <div class="article-title">${highlightedTitle}</div>
-                        <div class="article-url">
-                            <i class="fas fa-link"></i> <a href="${articleUrl}" target="_blank" title="فتح المقالة">${articleUrl}</a>
-                        </div>
-                        <div class="article-meta">
-                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-tag"></i></span><span class="article-source">${article.source}</span></span>
-                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-calendar-alt"></i></span>${article.year}</span>
-                            <span class="meta-item"><span class="meta-icon"><i class="fas fa-book"></i></span>${article.journal}</span>
-                            ${doiValid ? `
-                                <span class="meta-item article-doi">
-                                    <span class="doi-prefix"><i class="fas fa-fingerprint"></i></span>
-                                    <a href="#" class="doi-link" onclick="openSciHubForDOI('${displayDoi}'); return false;" title="اضغط لفتح PDF">
-                                        ${displayDoi}
-                                    </a>
-                                </span>
-                            ` : `<span class="meta-item" style="background:#fff5f5; color:#d63031; border-color:#ffcccc;"><i class="fas fa-times-circle"></i> DOI غير صالح</span>`}
-                        </div>
-                        <div class="article-actions">
-                            ${doiValid ? `
-                                <button class="btn-pdf-scihub" onclick="openSciHubForDOI('${displayDoi}');">
-                                    <i class="fas fa-file-pdf"></i> PDF
-                                </button>
-                            ` : '<span style="color:#aaaaaa; font-size:0.8rem;"><i class="fas fa-ban"></i> لا يوجد DOI</span>'}
-                        </div>
-                    </div>
-                `;
+            const matched = items.filter(item => {
+                if (!detectSource(item)) return false;
+                if (!cleanAndValidateDOI(item['DOI'] || '')) return false;
+                const title = (item.title && item.title[0]) ? item.title[0].toLowerCase() : '';
+                if (!title) return false;
+                return keywordLower.every(kw => title.includes(kw));
             });
 
-            resultsGrid.innerHTML = html;
-        }
-
-        // ===== البحث الرئيسي =====
-        async function performSearch() {
-            const topic = topicInput.value.trim();
-            const keywords = keywordsInput.value.trim();
-
-            if (!keywords) {
-                alert('⚠️ الرجاء إدخال الكلمات المفتاحية (إلزامية)');
-                return;
-            }
-
-            const keywordList = keywords.split(/\s+/).filter(w => w.length > 2);
-            if (keywordList.length === 0) {
-                alert('⚠️ الكلمات المفتاحية يجب أن تحتوي على أكثر من حرفين');
-                return;
-            }
-
-            const from = parseInt(yearFrom.value);
-            const to = parseInt(yearTo.value);
-
-            if (isNaN(from) || isNaN(to)) {
-                alert('⚠️ الرجاء إدخال سنة البداية والنهاية بشكل صحيح');
-                return;
-            }
-
-            if (from > to) {
-                alert('⚠️ السنة الأولى يجب أن تكون أقل من السنة الأخيرة');
-                return;
-            }
-
-            const desiredCount = parseInt(desiredCountInput.value);
-            if (isNaN(desiredCount) || desiredCount < 0) {
-                alert('⚠️ الرجاء إدخال عدد صحيح (0 لجلب جميع المطابقات)');
-                return;
-            }
-
-            searchBtn.disabled = true;
-            searchBtn.innerHTML = '<span class="loading-spinner"></span> جاري البحث...';
-
-            resultsGrid.innerHTML = `<div class="empty-state"><span class="empty-icon"><i class="fas fa-spinner fa-spin"></i></span><div class="empty-title">جاري البحث</div><div class="empty-desc">الكلمات: "${keywords}"<br>العدد المطلوب: ${desiredCount === 0 ? 'جميع المطابقات' : desiredCount}</div></div>`;
-            messageContainer.innerHTML = '';
-
-            try {
-                const articles = await fetchArticles(topic, keywords, from, to, desiredCount);
-                displayArticles(articles);
-            } catch (error) {
-                console.error('Search error:', error);
-                let errorMsg = error.message || 'حدث خطأ غير متوقع.';
-                let details = '';
-                if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError') || errorMsg.includes('CORS') || errorMsg.includes('فشل الاتصال') || errorMsg.includes('فشل جلب البيانات')) {
-                    errorMsg = 'فشل الاتصال بالخادم. قد يكون السبب: ضعف الشبكة، أو حظر الخدمة، أو مشكلة في المتصفح.';
-                    details = '💡 تأكد من اتصالك بالإنترنت، وجرب استخدام شبكة Wi-Fi بدلاً من بيانات الهاتف، أو استخدم VPN. إذا استمرت المشكلة، حاول تقليل عدد المقالات المطلوبة.';
-                } else if (errorMsg.includes('HTTP 400')) {
-                    details = 'تأكد من أن الكلمات المفتاحية لا تحتوي على رموز خاصة غير مدعومة.';
-                } else if (errorMsg.includes('HTTP 429')) {
-                    details = 'لقد أرسلت عدداً كبيراً من الطلبات. انتظر بضع دقائق وحاول مجدداً.';
+            const converted = matched.map(item => {
+                const source = detectSource(item) || 'مصدر معتمد';
+                let year = 'N/A';
+                if (item['issued'] && item['issued']['date-parts'] && item['issued']['date-parts'][0]) {
+                    year = item['issued']['date-parts'][0][0] || 'N/A';
                 }
-                resultsGrid.innerHTML = `
-                    <div class="error-message">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <span class="error-icon"><i class="fas fa-exclamation-triangle"></i></span>
-                            <div>
-                                <strong>${errorMsg}</strong>
-                                ${details ? `<div class="error-details"><i class="fas fa-lightbulb"></i> ${details}</div>` : ''}
-                            </div>
-                        </div>
-                        <button class="retry-btn" onclick="document.getElementById('searchBtn').click();"><i class="fas fa-redo"></i> إعادة المحاولة</button>
-                    </div>
-                `;
-                resultsCount.textContent = '0';
-            } finally {
-                searchBtn.disabled = false;
-                searchBtn.innerHTML = '<i class="fas fa-rocket"></i> بحث';
-                progressContainer.style.display = 'none';
+                const validDoi = cleanAndValidateDOI(item['DOI']);
+                const journal = (item['container-title'] && item['container-title'][0]) || 'N/A';
+                let articleUrl = item['URL'] || null;
+                if (!articleUrl && validDoi) articleUrl = 'https://doi.org/' + encodeURIComponent(validDoi);
+                return { title: item.title[0] || 'عنوان غير متوفر', source, year, doi: validDoi, journal, url: articleUrl };
+            });
+
+            allMatched = allMatched.concat(converted);
+
+            const progress = Math.min(((page + 1) / 20) * 100, 95);
+            progressFill.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '%';
+            progressStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> تم جلب ' + totalFetched + ' مقالة، تم العثور على ' + allMatched.length + ' مطابقة...';
+
+            if (items.length < rowsPerPage) {
+                hasMore = false;
+            } else {
+                offset += rowsPerPage;
+                page++;
+                // تأخير أطول على الهواتف لتجنب الحظر
+                const delayTime = (isMobile ? 800 : 400) + Math.random() * 600 + page * 80;
+                await delay(delayTime);
             }
         }
 
-        // ===== أحداث =====
-        searchBtn.addEventListener('click', performSearch);
-        topicInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); performSearch(); } });
-        keywordsInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); performSearch(); } });
+        progressContainer.style.display = 'none';
+        messageContainer.innerHTML = '';
 
-        // عند تحميل الصفحة، نحاول اختبار الاتصال بخادم بروكسي للتحقق من الصحة
-        // لكننا لا نقوم بأي بحث تلقائي
+        if (allMatched.length === 0) {
+            messageContainer.innerHTML = '<div class="warning-box"><i class="fas fa-exclamation-triangle warning-icon"></i><div><strong>تنبيه:</strong> لم يتم العثور على مقالات مطابقة. جرب كلمات مفتاحية مختلفة أو وسّع نطاق السنوات.</div></div>';
+        } else if (allMatched.length < targetCount && !isUnlimited) {
+            messageContainer.innerHTML = '<div class="warning-box"><i class="fas fa-exclamation-circle warning-icon"></i><div><strong>تنبيه:</strong> تم العثور على ' + allMatched.length + ' مقالة فقط (العدد المطلوب ' + targetCount + '). قد لا يتوفر عدد كافٍ.</div></div>';
+        } else {
+            messageContainer.innerHTML = '<div class="success-box"><i class="fas fa-check-circle success-icon"></i><div><strong>نجاح:</strong> تم العثور على ' + allMatched.length + ' مقالة.</div></div>';
+        }
 
-    })();
+        return allMatched;
+    }
+
+    // ===== عرض النتائج =====
+    function displayArticles(articles) {
+        if (!articles || articles.length === 0) {
+            resultsGrid.innerHTML = '<div class="empty-state"><span class="empty-icon"><i class="fas fa-frown-open"></i></span><div class="empty-title">لا توجد نتائج</div><div class="empty-desc">لم نجد مقالات مطابقة من المصادر المعتمدة.</div></div>';
+            resultsCount.textContent = '0';
+            return;
+        }
+
+        resultsCount.textContent = articles.length;
+        const keywordWords = keywordsInput.value.trim().split(/\s+/).filter(w => w.length > 2);
+
+        let html = '';
+        articles.forEach(function(article) {
+            let highlightedTitle = article.title;
+            keywordWords.forEach(function(word) {
+                const regex = new RegExp('(' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+                highlightedTitle = highlightedTitle.replace(regex, '<span class="keyword-highlight">$1</span>');
+            });
+
+            const doiValid = article.doi && cleanAndValidateDOI(article.doi) !== null;
+            const displayDoi = doiValid ? article.doi : 'غير متوفر';
+            const articleUrl = article.url || '#';
+            const safeDoi = doiValid ? article.doi.replace(/'/g, "\\'") : '';
+
+            html += '<div class="article-card" data-doi="' + (article.doi || '') + '">' +
+                '<div class="match-badge"><i class="fas fa-check-circle"></i> مصدر معتمد</div>' +
+                '<div class="article-title">' + highlightedTitle + '</div>' +
+                '<div class="article-url"><i class="fas fa-link"></i> <a href="' + articleUrl + '" target="_blank">' + articleUrl + '</a></div>' +
+                '<div class="article-meta">' +
+                    '<span class="meta-item"><span class="meta-icon"><i class="fas fa-tag"></i></span><span class="article-source">' + article.source + '</span></span>' +
+                    '<span class="meta-item"><span class="meta-icon"><i class="fas fa-calendar-alt"></i></span>' + article.year + '</span>' +
+                    '<span class="meta-item"><span class="meta-icon"><i class="fas fa-book"></i></span>' + article.journal + '</span>' +
+                    (doiValid ? '<span class="meta-item article-doi"><span><i class="fas fa-fingerprint"></i></span><a href="#" class="doi-link" onclick="openSciHubForDOI(\'' + safeDoi + '\'); return false;">' + displayDoi + '</a></span>' : '<span class="meta-item" style="background:#fff5f5; color:#d63031; border-color:#ffcccc;"><i class="fas fa-times-circle"></i> DOI غير صالح</span>') +
+                '</div>' +
+                '<div class="article-actions">' +
+                    (doiValid ? '<button class="btn-pdf-scihub" onclick="openSciHubForDOI(\'' + safeDoi + '\');"><i class="fas fa-file-pdf"></i> PDF</button>' : '<span style="color:#aaaaaa; font-size:0.8rem;"><i class="fas fa-ban"></i> لا يوجد DOI</span>') +
+                '</div>' +
+            '</div>';
+        });
+
+        resultsGrid.innerHTML = html;
+    }
+
+    // ===== البحث الرئيسي =====
+    async function performSearch() {
+        const topic = topicInput.value.trim();
+        const keywords = keywordsInput.value.trim();
+
+        if (!keywords) { alert('⚠️ الرجاء إدخال الكلمات المفتاحية (إلزامية)'); return; }
+
+        const keywordList = keywords.split(/\s+/).filter(w => w.length > 2);
+        if (keywordList.length === 0) { alert('⚠️ الكلمات المفتاحية يجب أن تحتوي على أكثر من حرفين'); return; }
+
+        const from = parseInt(yearFrom.value);
+        const to = parseInt(yearTo.value);
+        if (isNaN(from) || isNaN(to)) { alert('⚠️ الرجاء إدخال سنة البداية والنهاية بشكل صحيح'); return; }
+        if (from > to) { alert('⚠️ السنة الأولى يجب أن تكون أقل من السنة الأخيرة'); return; }
+
+        const desiredCount = parseInt(desiredCountInput.value);
+        if (isNaN(desiredCount) || desiredCount < 0) { alert('⚠️ الرجاء إدخال عدد صحيح (0 لجلب جميع المطابقات)'); return; }
+
+        searchBtn.disabled = true;
+        searchBtn.innerHTML = '<span class="loading-spinner"></span> جاري البحث...';
+
+        resultsGrid.innerHTML = '<div class="empty-state"><span class="empty-icon"><i class="fas fa-spinner fa-spin"></i></span><div class="empty-title">جاري البحث</div><div class="empty-desc">الكلمات: "' + keywords + '"<br>العدد المطلوب: ' + (desiredCount === 0 ? 'جميع المطابقات' : desiredCount) + '</div></div>';
+        messageContainer.innerHTML = '';
+
+        try {
+            const articles = await fetchArticles(topic, keywords, from, to, desiredCount);
+            displayArticles(articles);
+        } catch (error) {
+            console.error('Search error:', error);
+            let errorMsg = error.message || 'حدث خطأ غير متوقع.';
+            let details = '';
+
+            if (errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError') ||
+                errorMsg.includes('فشل الاتصال') || errorMsg.includes('فشل جلب البيانات') ||
+                errorMsg.includes('abort') || errorMsg.includes('timeout')) {
+                errorMsg = 'فشل الاتصال بالخادم.';
+                details = isMobile
+                    ? '📱 على الهاتف: تأكد من قوة إشارة الإنترنت، وجرب الاتصال بشبكة Wi-Fi، أو قلّل عدد المقالات المطلوبة إلى 20-50.'
+                    : '💡 تأكد من اتصالك بالإنترنت وحاول مجدداً.';
+            } else if (errorMsg.includes('HTTP 429')) {
+                details = 'لقد أرسلت عدداً كبيراً من الطلبات. انتظر دقيقة وحاول مجدداً.';
+            }
+
+            resultsGrid.innerHTML = '<div class="error-message">' +
+                '<div style="display:flex; align-items:center; gap:12px;">' +
+                '<span class="error-icon"><i class="fas fa-exclamation-triangle"></i></span>' +
+                '<div><strong>' + errorMsg + '</strong>' +
+                (details ? '<div class="error-details"><i class="fas fa-lightbulb"></i> ' + details + '</div>' : '') +
+                '</div></div>' +
+                '<button class="retry-btn" onclick="document.getElementById(\'searchBtn\').click();"><i class="fas fa-redo"></i> إعادة المحاولة</button>' +
+                '</div>';
+            resultsCount.textContent = '0';
+        } finally {
+            searchBtn.disabled = false;
+            searchBtn.innerHTML = '<i class="fas fa-rocket"></i> بحث';
+            progressContainer.style.display = 'none';
+        }
+    }
+
+    // ===== أحداث =====
+    searchBtn.addEventListener('click', performSearch);
+    topicInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); performSearch(); } });
+    keywordsInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); performSearch(); } });
+
+})();
 </script>
 
 </body>
